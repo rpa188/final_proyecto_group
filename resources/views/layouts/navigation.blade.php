@@ -28,33 +28,35 @@
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
-                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="/venta">Ventas</a>
-                                    </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Producto
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="/productos">{{ __('Listar') }}</a></li>
-                                            <li><hr class="dropdown-divider"></li>
-                                            <li><a class="dropdown-item" href="/add-product">{{ __('Agregar Producto') }}</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="nav-item dropdown">
-                                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                            Categoría
-                                        </a>
-                                        <ul class="dropdown-menu">
-                                            <li><a class="dropdown-item" href="/categorias">{{ __('Listar') }}</a></li>
-                                            <li><hr class="dropdown-divider"></li>
-                                            <li><a class="dropdown-item" href="/add-category">{{ __('Agregar Categoría') }}</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
+                            @can('maintenance')
+                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                        <li class="nav-item">
+                                            <a class="nav-link" href="/venta">Ventas</a>
+                                        </li>
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Producto
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="/productos">{{ __('Listar') }}</a></li>
+                                                <li><hr class="dropdown-divider"></li>
+                                                <li><a class="dropdown-item" href="/add-product">{{ __('Agregar Producto') }}</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Categoría
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="/categorias">{{ __('Listar') }}</a></li>
+                                                <li><hr class="dropdown-divider"></li>
+                                                <li><a class="dropdown-item" href="/add-category">{{ __('Agregar Categoría') }}</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            @endcan
                         </div>
                     </nav>
                 </div>
@@ -117,31 +119,33 @@
                 {{ __('Agregar Producto') }}
             </x-responsive-nav-link>-->
 
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="/venta">Ventas</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Producto
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/productos">Listar</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/add-product">{{ __('Agregar Producto') }}</a>
-                    </div>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Categoría
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/categorias">Listar</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/add-category">{{ __('Agregar Categoría') }}</a>
-                    </div>
-                </li>
-            </ul>
+            @can('maintenance')
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/venta">Ventas</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Producto
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/productos">Listar</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/add-product">{{ __('Agregar Producto') }}</a>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Categoría
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/categorias">Listar</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="/add-category">{{ __('Agregar Categoría') }}</a>
+                        </div>
+                    </li>
+                </ul>
+            @endcan
         </div>
 
         <!-- Responsive Settings Options -->
