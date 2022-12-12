@@ -13,7 +13,7 @@
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="py-4 px-4 bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <form action="{{ url('add-product') }}" method="POST">
+                <form action="{{ url('add-product') }}" method="POST" enctype="multipart/form-data">
                 	@csrf
                 	<div>
 		                <x-input-label for="id_categoria" :value="__('id_categoria')" />
@@ -39,6 +39,11 @@
 		                <x-input-label for="precio" :value="__('precio')" />
 
 		                <x-text-input id="precio" class="block mt-1 w-full" type="text" name="precio" :value="old('precio')" autofocus />
+		            </div>
+                	<div>
+		                <x-input-label for="imagen" :value="__('imagen')" />
+
+		                <x-text-input id="imagen" class="block mt-1 w-full" type="file" name="imagen" :value="old('imagen')" />
 		            </div>
 
                 	<div>

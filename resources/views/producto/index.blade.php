@@ -22,6 +22,7 @@
             		<tbody>
             			@forelse ($productos as $producto)
 	            			<tr>
+	            				<td><img src="{{ asset('/storage/images/'.$producto->SKU . '.jpg') }}" alt="" title=""></td>
 	            				<td>{{ $producto->id_categoria }}</td>
 	            				<td>{{ $producto->nombre }}</td>
 	            				<td>{{ $producto->SKU }}</td>
