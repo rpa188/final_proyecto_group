@@ -1034,3 +1034,45 @@ jQuery(document).ready(function($) {
         })
     }
 });
+
+//extras
+function getDepartamento(selectedDepartamento, selectedProvincia, selectedDistrito){
+    $.get( "/get-departamento", function( data ) {
+        var htmlContent = "";
+        for(var i=0;i<data.length;i++){
+            htmlContent += '<option value="' + data[i].id_departamento + '" '+((selectedDepartamento===data[i].id_departamento)?"selected":"")+'>' + data[i].dpto + '</option>'
+        }
+        $('#cboDepartamento')
+            .empty()
+            .append(htmlContent);
+        getProvincia(selectedProvincia, selectedDistrito);
+    });
+}
+
+function getProvincia(selectedProvincia, selectedDistrito){
+    var idDepartamento = $('#cboDepartamento').val();
+    $.get( "/get-provincia/" + idDepartamento, function( data ) {
+        var htmlContent = "";
+        for(var i=0;i<data.length;i++){
+            htmlContent += '<option value="' + data[i].id_provincia + '" '+((selectedProvincia===data[i].id_provincia)?"selected":"")+'>' + data[i].prov + '</option>'
+        }
+        $('#cboProvincia')
+            .empty()
+            .append(htmlContent);
+        getDistrito(selectedDistrito);
+    });
+}
+
+function getDistrito(selectedDistrito){
+    var idDepartamento = $('#cboDepartamento').val();
+    var idProvincia = $('#cboProvincia').val();
+    $.get( "/get-distrito/" + idDepartamento + "/" + idProvincia, function( data ) {
+        var htmlContent = "";
+        for(var i=0;i<data.length;i++){
+            htmlContent += '<option value="' + data[i].id_distrito + '" '+((selectedDistrito===data[i].id_distrito)?"selected":"")+'>' + data[i].distrito + '</option>'
+        }
+        $('#cboDistrito')
+            .empty()
+            .append(htmlContent);
+    });
+}

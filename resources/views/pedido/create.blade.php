@@ -639,17 +639,20 @@
                                 <div class="row">
                                     <div class="col-md-6 col-sm-6 ">
                                         <label class="out">Departamento *</label><br>
-                                        <input type="text" name="departamento" placeholder="Ingrese Departamento" required  class="district" value="{{ $data['direccion']->departamento ?? "" }}">
+                                        <select id="cboDepartamento" name="departamento" onchange="getProvincia();">
+                                        </select>
                                     </div>
                                     <div class="col-md-6 col-sm-6">
                                         <label class="out">Provincia *</label><br>
-                                        <input type="text" name="provincia" placeholder="Ingrese Provincia" required class="district" value="{{ $data['direccion']->provincia ?? "" }}">
+                                        <select id="cboProvincia" name="provincia" onchange="getDistrito();">
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-6 col-sm-6">
                                         <label class="out">Distrito *</label><br>
-                                        <input type="text" name="distrito" placeholder="Ingrese Distrito" required class="district" value="{{ $data['direccion']->distrito ?? "" }}">
+                                        <select id="cboDistrito" name="distrito">
+                                        </select>
                                     </div>
                                     <div class="col-md-6 col-sm-6 ">
                                         <label class="out">Postcode/ZIP</label><br>
@@ -823,7 +826,7 @@
         });
     }
 
-
+    getDepartamento("{{ $data['direccion']->departamento }}", "{{ $data['direccion']->provincia }}", "{{ $data['direccion']->distrito }}");
 </script>
 </body>
 

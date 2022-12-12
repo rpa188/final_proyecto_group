@@ -65,7 +65,7 @@ Route::controller(App\Http\Controllers\CartController::class)->group(function ()
     Route::delete('/delete-cart', 'clean');
 });
 
-Route::controller(App\Http\Controllers\PedidoController::class)->group(function () {
+Route::middleware(['auth'])->controller(App\Http\Controllers\PedidoController::class)->group(function () {
     Route::get('/pedidos', 'index');
     Route::get('/pedido/{order_id}', 'detail');
     Route::get('/checkout', 'create');
@@ -82,4 +82,10 @@ Route::middleware(['auth'])->controller(App\Http\Controllers\PersonalDataControl
 
 Route::middleware(['auth'])->controller(App\Http\Controllers\DireccionController::class)->group(function () {
     Route::put('/update-direccion/{direccion_id}', 'update');
+});
+
+Route::middleware(['auth'])->controller(App\Http\Controllers\UbigeoController::class)->group(function () {
+    Route::get('/get-departamento/', 'departamento');
+    Route::get('/get-provincia/{departamento_id}', 'provincia');
+    Route::get('/get-distrito/{departamento_id}/{provincia_id}', 'distrito');
 });
