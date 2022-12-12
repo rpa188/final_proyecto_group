@@ -32,7 +32,17 @@ class PerfilController extends Controller
         }
         $data = [
             'personal_data' => $personalDataObj,
-            'direccion' => $direccionObj
+            'direccion' => $direccionObj,
+            'tipoDocumento' => [
+                (object) [
+                    'id' => 1,
+                    'nombre' => 'DNI'
+                ],
+                (object) [
+                    'id' => 2,
+                    'nombre' => 'LE'
+                ]
+            ]
         ];
         return view('perfil.index', compact('data'));
     }

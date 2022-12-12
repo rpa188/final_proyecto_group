@@ -37,7 +37,7 @@
                     <li><a data-toggle="tab" href="#register">Register</a></li>
                 </ul>
                 <div class="tab-content">
-                    <div id="login" class="tab-pane fade in active">
+                    <div id="login" class="tab-pane fadezoa in active">
                         <div class="row">
                             <div class="col-md-4">
                                 <form method="post" class="form-customer form-login">
@@ -145,7 +145,7 @@
                             </div>
                         </div>
                     </div>
-                    <div id="register" class="tab-pane fade">
+                    <div id="register" class="tab-pane fadezoa">
                         <div class="row">
                             <div class="col-md-4">
                                 <form method="post" class="form-customer form-login">
@@ -276,9 +276,9 @@
                     </ul>
 
                     <div class="tab-content">
-                        <div id="personal-data" class="tab-pane fade in active">
+                        <div id="personal-data" class="tab-pane fadezoa in active">
                             <div class="form">
-                                <form action="{{ url('update-personaldata/'.($data['personal_data']->id ?? "0")) }}" method="POST">
+                                <form action="{{ url('update-personaldata/'.($data['personal_data']->id ?? "0").'/1') }}" method="POST">
                                     @csrf
                                     @method('PUT')
                                     <div class="row">
@@ -300,7 +300,13 @@
                                     <div class="row">
                                         <div class="col-md-6 col-sm-6">
                                             <label class="out">Tipo de Documento<span style="color:#f33">*</span></label><br>
-                                            <input type="text" name="id_tipo_documento" placeholder="Ingrese Tipo de Documento" required class="district" value="{{ $data['personal_data']->id_tipo_documento ?? "" }}">
+                                            <select name="id_tipo_documento" class="form-select" aria-label="Default select example">
+                                                @forelse ($data['tipoDocumento'] as $tipoDocumento)
+                                                    <option value="{{ $tipoDocumento->id }}">{{ $tipoDocumento->nombre }}</option>
+                                                @empty
+                                                    <option value="">No Item</option>
+                                                @endforelse
+                                            </select>
                                         </div>
                                         <div class="col-md-6 col-sm-6">
                                             <label class="out">Número de Documento<span>*</span></label><br>
@@ -321,7 +327,7 @@
                                 </form>
                             </div>
                         </div>
-                        <div id="shipping-address" class="tab-pane fade in">
+                        <div id="shipping-address" class="tab-pane fadezoa in">
                             <div class="form">
                                 <form action="{{ url('update-direccion/'.($data['direccion']->id ?? "0")) }}" method="POST">
                                     @csrf
@@ -361,17 +367,20 @@
                                     <div class="row">
                                         <div class="col-md-6 col-sm-6 ">
                                             <label class="out">Departamento *</label><br>
-                                            <input type="text" name="departamento" placeholder="Ingrese Departamento" required  class="district" value="{{ $data['direccion']->departamento ?? "" }}">
+                                            <select id="cboDepartamento" name="departamento" onchange="getProvincia();">
+                                            </select>
                                         </div>
                                         <div class="col-md-6 col-sm-6">
                                             <label class="out">Provincia *</label><br>
-                                            <input type="text" name="provincia" placeholder="Ingrese Provincia" required class="district" value="{{ $data['direccion']->provincia ?? "" }}">
+                                            <select id="cboProvincia" name="provincia" onchange="getDistrito();">
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-6 col-sm-6">
                                             <label class="out">Distrito *</label><br>
-                                            <input type="text" name="distrito" placeholder="Ingrese Distrito" required class="district" value="{{ $data['direccion']->distrito ?? "" }}">
+                                            <select id="cboDistrito" name="distrito">
+                                            </select>
                                         </div>
                                         <div class="col-md-6 col-sm-6 ">
                                             <label class="out">Postcode/ZIP</label><br>
@@ -441,8 +450,55 @@
             </div>
         </footer>
         <!-- End Footer -->
-
-
-
     </div>
+    <script>
+        $(document).ready(function(){
+            $(".nav-tabs a").click(function(){
+                console.log($(this));
+                if($(this).context.hash === '#shipping-address'){
+                    $("#shipping-address").removeClass("hide");
+                    $("#shipping-address").addClass("show");
+                    $("#personal-data").removeClass("show");
+                    $("#personal-data").addClass("hide");
+                } else {
+                    $("#personal-data").removeClass("hide");
+                    $("#personal-data").addClass("show");
+                    $("#shipping-address").removeClass("show");
+                    $("#shipping-address").addClass("hide");
+                }
+            });
+        });
+
+        function submitCheckout(){
+            var id_tipo_comprobante;
+            var id_tipo_pago;
+            var completeFormData = $('#direccionForm').serializeArray().reduce(function(obj, item) {
+                obj[item.name] = item.value;
+                return obj;
+            }, {});
+            var tipo_comprobante = document.getElementsByName('id_tipo_comprobante');
+            for(i = 0; i < tipo_comprobante.length; i++) {
+                if(tipo_comprobante[i].checked)
+                    id_tipo_comprobante = tipo_comprobante[i].value;
+            }
+            var tipo_pago = document.getElementsByName('id_tipo_pago');
+            for(i = 0; i < tipo_pago.length; i++) {
+                if(tipo_pago[i].checked)
+                    id_tipo_pago = tipo_pago[i].value;
+            }
+            completeFormData['id_tipo_comprobante'] = id_tipo_comprobante;
+            completeFormData['id_tipo_pago'] = id_tipo_pago;
+
+            $.ajax({
+                type: 'POST',
+                url: '/create-order',
+                data: completeFormData,
+                success: function (data) {
+                    window.location.href = "{{ url('/pedidos') }}"
+                }
+            });
+        }
+
+        getDepartamento("{{ $data['direccion']->departamento ?? '01' }}", "{{ $data['direccion']->provincia ?? '01' }}", "{{ $data['direccion']->distrito ?? '01' }}");
+    </script>
 </x-app-layout>

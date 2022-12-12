@@ -30,6 +30,11 @@
 
         <!-- Scripts -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="/js/jquery.js"></script>
+        <script src="/js/owl.carousel.min.js"></script>
+        <script src="/js/slick.min.js"></script>
+        <script src="/js/countdown.js"></script>
+        <script src="/js/main.js"></script>
 
     </head>
     <body class="font-sans antialiased">
@@ -66,7 +71,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4 col flex justify-content-center">
-                                <a href="#"><img src="img/logo.png" alt="" class="img-responsive"></a>
+                                <a href="#"><img src="img/logo2.png" alt="" class="img-responsive"></a>
                             </div>
                             <div class="col-md-4 col flex justify-content-end">
                                 <div class="topbar-left">
@@ -130,18 +135,12 @@
             <div class="toast-container position-fixed bottom-0 end-0 p-3">
                 <div id="liveToast" class="toast text-bg-success" role="alert" aria-live="assertive" aria-atomic="true">
                     <div class="toast-body">
-                        {{ session('message') }}
+                        <h5>{{ session('message') }}</h5>
                     </div>
                 </div>
             </div>
         </div>
     </body>
-    <script src="/js/jquery.js"></script>
-    <script src="/js/bootstrap.min.js"></script>
-    <script src="/js/owl.carousel.min.js"></script>
-    <script src="/js/slick.min.js"></script>
-    <script src="/js/countdown.js"></script>
-    <script src="/js/main.js"></script>
     <script>
         $(document).ready(function () {
             const toastLiveExample = document.getElementById('liveToast');

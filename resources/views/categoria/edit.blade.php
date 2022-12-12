@@ -1,4 +1,5 @@
 <x-app-layout>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <div class="py-12">
         <x-validation-errors class="mb-4" :errors="$errors" />
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">

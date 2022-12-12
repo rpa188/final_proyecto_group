@@ -57,7 +57,7 @@ class PersonalDataController extends Controller
         if($pathid == '2'){
             $redirect_path = '/usuarios';
         }
-        return redirect($redirect_path);
+        return redirect($redirect_path)->with('message', 'Usuario Actualizado Exitosamente');
     }
 
     public function destroy(PersonalData $personalData)

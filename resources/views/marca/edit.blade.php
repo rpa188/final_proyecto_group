@@ -1,16 +1,14 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Marca') }}
-        </h2>
-    </x-slot>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <div class="py-12">
-
         <x-validation-errors class="mb-4" :errors="$errors" />
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="py-4 px-4 bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div>
+                    <strong>Editar Marca</strong>
+                </div>
                 <form action="{{ url('update-brand/'.$marca->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
