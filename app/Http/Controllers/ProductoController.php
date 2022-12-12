@@ -6,6 +6,7 @@ use App\Models\Categoria;
 use App\Models\Marca;
 use App\Models\Producto;
 use App\Models\ProductoHist;
+use App\Models\Stock;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ProductoFormRequest;
@@ -15,7 +16,7 @@ class ProductoController extends Controller
 {
     public function index()
     {
-        $productos = Producto::with(['categoria', 'marca'])->get();
+        $productos = Producto::with(['categoria', 'marca', 'stock'])->get();
         return view('producto.index', compact('productos'));
     }
 
@@ -49,6 +50,13 @@ class ProductoController extends Controller
         ];
         ProductoHist::create($historyData);
 
+        Stock::create([
+            'id_producto' => $producto->id,
+            'id_sucursal' => 1,
+            'stock' => $data['stock'],
+            'creator_user' => Auth::id()
+        ]);
+
         return redirect('/productos')->with('message', 'Producto creado exitosamente');
     }
 
@@ -57,7 +65,7 @@ class ProductoController extends Controller
         $data = [
             'marca' => Marca::all(),
             'categoria' => Categoria::all(),
-            'producto' => Producto::with(['categoria', 'marca'])->find($product_id)
+            'producto' => Producto::with(['categoria', 'marca', 'stock'])->find($product_id)
         ];
         return view('producto.edit', compact('data'));
     }
@@ -93,6 +101,20 @@ class ProductoController extends Controller
             'modifier_user' => Auth::id()
         ];
         ProductoHist::create($historyData);
+
+        $stock = Stock::where('id_producto', $product_id)->get();
+        if(sizeof($stock) == 0){
+            Stock::create([
+                'id_producto' => $product_id,
+                'id_sucursal' => 1,
+                'stock' => $data['stock'],
+                'creator_user' => Auth::id()
+            ]);
+        } else {
+            $stockObj = $stock[0];
+            $stockObj->stock = $data['stock'];
+            $stockObj->save();
+        }
 
         return redirect('/productos')->with('message', 'Producto Actualizado Exitosamente');
     }

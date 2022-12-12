@@ -36,8 +36,8 @@ class Pedido extends Model
         return $this->belongsTo(TipoPago::class, 'id_tipo_pago', 'id');
     }
 
-    /*public function status_pedido()
+    public function status_pedido()
     {
         return $this->belongsTo(StatusPedido::class, 'id_status_pedido', 'id');
-    }*/
+    }
 }

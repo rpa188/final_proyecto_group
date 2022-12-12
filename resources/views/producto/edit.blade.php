@@ -52,6 +52,11 @@
                         </select>
                     </div>
                     <div class="p-2">
+                        <x-input-label for="stock" :value="__('stock')" />
+
+                        <x-text-input id="stock" class="block mt-1 w-full" type="number" name="stock" :value="$data['producto']->stock->stock ?? 0" autofocus />
+                    </div>
+                    <div class="p-2">
                         <x-input-label for="precio" :value="__('precio')" />
                         @can('create-users')
                         <x-text-input id="precio" class="block mt-1 w-full" type="text" name="precio" :value="$data['producto']->precio" autofocus />

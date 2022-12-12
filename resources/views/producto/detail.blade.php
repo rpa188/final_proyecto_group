@@ -578,7 +578,7 @@
                                 <div class="zoa-qtt">
                                     <button type="button" class="quantity-left-minus btn btn-number js-minus" data-type="minus" data-field="">
                                     </button>
-                                    <input id="itemCantidad" type="text" name="number" value="1" class="product_quantity_number js-number">
+                                    <input id="itemCantidad" type="text" name="number" value="1" min="1" max="100" class="product_quantity_number js-number">
                                     <button type="button" class="quantity-right-plus btn btn-number js-plus" data-type="plus" data-field="">
                                     </button>
                                 </div>

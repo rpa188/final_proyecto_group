@@ -152,7 +152,7 @@ jQuery(document).ready(function($) {
         var quantity = parseInt($('.js-number').val(), 10);
 
         // If is not undefined
-
+        if(quantity <= 100)
         $('.js-number').val(quantity + 1);
 
 

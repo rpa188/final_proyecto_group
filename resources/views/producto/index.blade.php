@@ -18,6 +18,7 @@
             				<th>Nombre</th>
             				<th>SKU</th>
             				<th>Descripcion</th>
+                            <th>Stock</th>
             				<th>Precio</th>
             				<th>Acciones</th>
             			</tr>
@@ -32,6 +33,7 @@
 	            				<td>{{ $producto->nombre }}</td>
 	            				<td>{{ $producto->SKU }}</td>
 	            				<td>{{ $producto->descripcion }}</td>
+                                <td>{{ $producto->stock->stock ?? '0' }}</td>
 	            				<td>{{ $producto->precio }}</td>
 	            				<td>
 	            					<a href="{{ url('/edit-product/'.$producto->id) }}" class="btn btn-primary">Editar</a>

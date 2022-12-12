@@ -43,6 +43,9 @@ class ProductoFormRequest extends FormRequest
             'descripcion' => [
                 'required',
                 'max:255'
+            ],
+            'stock' => [
+                'required'
             ]
         ];
 

@@ -31,4 +31,9 @@ class Producto extends Model
     {
         return $this->belongsTo(Marca::class, 'id_marca', 'id');
     }
+
+    public function stock()
+    {
+        return $this->hasOne(Stock::class, 'id_producto', 'id');
+    }
 }

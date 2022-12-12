@@ -49,6 +49,11 @@
                             @endforelse
                         </select>
                     </div>
+                    <div class="p-2">
+                        <x-input-label for="stock" :value="__('Stock')" />
+
+                        <x-text-input id="stock" class="block mt-1 w-full" type="number" name="stock" :value="old('stock')" autofocus />
+                    </div>
                 	<div class="p-2">
 		                <x-input-label for="precio" :value="__('Precio')" />
 
