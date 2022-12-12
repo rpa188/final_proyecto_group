@@ -11,7 +11,7 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <!--<div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
@@ -21,6 +21,39 @@
                     <x-nav-link :href="url('add-product')" :active="request()->routeIs('add-product')">
                         {{ __('Agregar Producto') }}
                     </x-nav-link>
+                </div>-->
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                        <a class="navbar-brand" href="/dashboard">Ecommerce Pedidos</a>
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav mr-auto">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/venta">Ventas</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Producto
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="/productos">Listar</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="/add-product">{{ __('Agregar Producto') }}</a>
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Categoría
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                        <a class="dropdown-item" href="/categorias">Listar</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="/add-category">{{ __('Agregar Categoría') }}</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
                 </div>
             </div>
 
@@ -69,7 +102,7 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+            <!--<x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
 
@@ -79,7 +112,33 @@
 
             <x-responsive-nav-link :href="url('add-product')" :active="request()->routeIs('add-product')">
                 {{ __('Agregar Producto') }}
-            </x-responsive-nav-link>
+            </x-responsive-nav-link>-->
+
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/venta">Ventas</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Producto
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/productos">Listar</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/add-product">{{ __('Agregar Producto') }}</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Categoría
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/categorias">Listar</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/add-category">{{ __('Agregar Categoría') }}</a>
+                    </div>
+                </li>
+            </ul>
         </div>
 
         <!-- Responsive Settings Options -->
