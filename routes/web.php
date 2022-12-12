@@ -24,6 +24,7 @@ Route::get('/dashboard', function () {
 require __DIR__.'/auth.php';
 
 Route::controller(App\Http\Controllers\ProductoController::class)->group(function () {
-    Route::get('/producto', 'create');
-    Route::post('/producto', 'store');
+    Route::get('/productos', 'index');
+    Route::get('/add-product', 'create');
+    Route::post('/add-product', 'store');
 });

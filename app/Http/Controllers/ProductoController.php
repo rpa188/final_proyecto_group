@@ -8,10 +8,17 @@ use App\Http\Requests\ProductoFormRequest;
 
 class ProductoController extends Controller
 {
+    public function index()
+    {
+        $productos = Producto::all();
+        return view('producto.index', compact('productos'));
+    }
+
     public function create()
     {
         return view('producto.create');
     }
+
     public function store(ProductoFormRequest $request)
     {
         $data = $request->validated();
@@ -26,6 +33,6 @@ class ProductoController extends Controller
           'precio' => $request->get('precio')
         ]);
         $producto->save();*/
-        return redirect('/producto')->with('message', 'Successfully added');
+        return redirect('/productos')->with('message', 'Successfully added');
     }
 }

@@ -13,7 +13,7 @@
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="py-4 px-4 bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <form action="{{ url('producto') }}" method="POST">
+                <form action="{{ url('add-product') }}" method="POST">
                 	@csrf
                 	<div>
 		                <x-input-label for="id_categoria" :value="__('id_categoria')" />
