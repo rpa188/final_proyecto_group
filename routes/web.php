@@ -29,6 +29,7 @@ require __DIR__.'/auth.php';
 
 Route::controller(App\Http\Controllers\ProductoController::class)->group(function () {
     Route::get('/productos', 'index');
+    Route::get('/producto/{product_id}', 'detail');
     Route::get('/add-product', 'create');
     Route::post('/add-product', 'store');
     Route::get('/edit-product/{product_id}', 'edit');

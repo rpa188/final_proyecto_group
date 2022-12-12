@@ -116,4 +116,12 @@ class ProductoController extends Controller
         $producto->delete();
         return redirect('/productos')->with('message', 'Producto Borrado Exitosamente');
     }
+
+    public function detail($product_id){
+        $data = [
+            'producto' => Producto::with(['categoria', 'marca'])->find($product_id),
+            'recomendados' => Producto::all()->random(5) //where('id','!=',$product_id)->inRandomOrder()->take(5)
+            ];
+        return view('producto.detail', compact('data'));
+    }
 }

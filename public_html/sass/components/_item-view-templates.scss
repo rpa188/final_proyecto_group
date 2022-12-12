@@ -3,7 +3,7 @@
  */
 
 .product-title {
-    
+
     font-size: 14px;
     a{
         color:$body-text-color;
@@ -27,7 +27,7 @@
 
 .shop-top{
     @media(min-width:$screen-md){
-    
+
     padding-top:45px;
     }
     @media(min-width:$screen-xs){
@@ -66,7 +66,7 @@
             > ul{
                 @include flex;
                 @include flex-direction(row);
-                
+
                 > li{
                     @include flex;
                     @media(min-width:$screen-xs){
@@ -109,8 +109,8 @@
                         margin-right:60px;
                     }
                     .dropdown-menu{
-                        
-                            
+
+
                             width:100%;
                             top:100%;
                             @include box-shawdow;
@@ -127,9 +127,9 @@
                             -webkit-transition-duration: 180ms;
                             transition-duration: 180ms;
                             }
-                            
-                            
-                        
+
+
+
                         > li > a{
                                 padding:10px 20px;
                             }
@@ -176,7 +176,7 @@
         padding-left:20px;
         border-left:1px solid $border-color;
         }
-        
+
         a {
             padding: 0 10px;
             text-align: center;
@@ -257,7 +257,7 @@
                         color:$theme-color;
                     }
                 }
-                
+
             }
         }
     }
@@ -294,7 +294,7 @@
     @media(min-width: $screen-md) {
         opacity: 0;
         visibility: hidden;
-        
+
         width: 100%;
         position: absolute;
         left: 50%;
@@ -702,7 +702,7 @@
             padding-left:100px;
         }
         label {
-            
+
             margin-bottom: 15px;
         }
         .product-rating {
@@ -928,7 +928,7 @@
                     transition: all .3s;
                 }
             }
-        
+
         &.slick-current{
             .img{
                 border:1px solid #cccccc;
@@ -940,8 +940,8 @@
 .multiple-img-list-ver2 {
     position: relative;
     &.slick-vertical .slick-slide {
-        
-       
+
+
     }
     &.v2 .slick-slide {
         border-radius: 10px;
@@ -998,7 +998,7 @@
 }
 
 .product-images {
-    
+
     overflow:hidden;
     @media(min-width: 1367px) {
         width: 88.5555%;
@@ -1006,7 +1006,7 @@
         &.v2 {
             @include order(1);
             border:0;
-            
+
         }
     }
 }
@@ -1114,7 +1114,7 @@
     &:first-child{
         padding-top:0;
     }
-    
+
     .r-name{
         font-size:16px;
         font-weight:600;
@@ -1155,7 +1155,7 @@
             color:#666;
             background:$white;
             padding-left:20px;
-            @include placeholder(#666, 14px); 
+            @include placeholder(#666, 14px);
             border:1px solid $border-color;
         }
         textarea{
@@ -1356,9 +1356,9 @@
     }
     li {
         display: inline-block;
-        
+
             margin-right: 60px;
-        
+
         text-align:center;
         &:last-child {
             margin-right: 0;
@@ -1835,7 +1835,7 @@
     @include border-radius(50%);
     @include flex;
     @include align-items(center);
-    
+
     span{
         text-align:center;
         font-size:16px;
@@ -1852,7 +1852,7 @@
 
     @include transition-hover-img;
     .product-img{
-        
+
     }
     .product-images {
         position: relative;
@@ -2223,7 +2223,7 @@
             left: 28px;
             bottom: 28px;
         }
-    }   
+    }
 }
 @media(max-width:$screen-xs-max){
     .lookbitem{
@@ -2244,7 +2244,7 @@
     width: 20px;
     height: 20px;
     cursor: pointer;
-    
+
     &:before{
             -webkit-transform: rotate(45deg);
             -ms-transform: rotate(45deg);
@@ -3102,7 +3102,7 @@
                 border: 1px solid #f2dac0;
                 border-radius: 50%;
             }
-            
+
         }
     }
 }
@@ -3267,8 +3267,8 @@
 // product grid to product list
 .product-grid {
     &.product-list {
-        
-        
+
+
         .product-item {
             width: 100%;
              @media(min-width: $screen-sm) {
@@ -3286,13 +3286,13 @@
             }
             .product-info {
                 text-align:left;
-                
+
                 @media(min-width: $screen-sm) {
                     @include flex;
                     @include flex-direction(column);
                     width: 66.666667%;
-                    
-                   
+
+
                     .element-list {
                         width: 50%;
                         &.element-list-left {
@@ -3367,8 +3367,8 @@
                 display: none;
             }
 
-            
-            
+
+
             &:hover{
                 .zoa-btn{
                     transform:none;
@@ -3648,7 +3648,7 @@
         @include border-radius(2px);
         margin: 0;
         padding: 0;
-        
+
     }
     .owl-nav>div {
         display: block;
@@ -3664,8 +3664,8 @@
         @include translateY(-50%);
 
         @include transition2;
-        
-        
+
+
     }
 }
 
@@ -3714,7 +3714,7 @@
         }
         &.active {
             a {
-               
+
                 font-weight: normal;
                 box-shadow: none;
                 border: 0;
@@ -3973,7 +3973,7 @@
         h1{
             margin: 13px 0;
             @media(min-width:$screen-xs){
-                
+
                 padding-right: 30px;
                 position: relative;
                 z-index: 1;
@@ -3993,7 +3993,7 @@
         h1{
             margin: 13px 0;
             @media(min-width:$screen-xs){
-                
+
                 padding-right: 40px;
                 position: relative;
                 z-index: 1;
@@ -4014,7 +4014,7 @@
             margin: 13px 0;
             font-size:18px;
             @media(min-width:$screen-xs){
-                
+
                 padding-right: 28px;
                 position: relative;
                 z-index: 1;
@@ -4036,7 +4036,7 @@
             font-size:20px;
             font-weight:bold;
             @media(min-width:$screen-xs){
-                
+
                 padding-right: 33px;
                 position: relative;
                 z-index: 1;
@@ -4058,7 +4058,7 @@
             font-size:20px;
             font-weight:bold;
             @media(min-width:$screen-xs){
-                
+
                 padding-right: 40px;
                 position: relative;
                 z-index: 1;
@@ -4080,7 +4080,7 @@
             font-size:20px;
             font-weight:bold;
             @media(min-width:$screen-xs){
-                
+
                 padding-right: 30px;
                 position: relative;
                 z-index: 1;
@@ -4090,7 +4090,7 @@
     &.style4{
         @media(max-width:812px){
             @include flex-direction(column);
-            
+
         }
         &:before{
             @media(min-width:$screen-sm-max){

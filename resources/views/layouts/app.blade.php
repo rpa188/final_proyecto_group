@@ -20,12 +20,12 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Styles ZOA-->
-        <!-- <link rel="shortcut icon" href="img/favicon.png" type="image/png">
-        <link rel="stylesheet" href="css/owl.carousel.min.css">
-        <link rel="stylesheet" href="css/slick.css">
-        <link rel="stylesheet" href="css/slick-theme.css">
-        <link rel="stylesheet" href="css/owl.theme.default.min.css">
-        <link rel="stylesheet" type="text/css" href="css/styles.css">-->
+        <link rel="shortcut icon" href="/img/favicon.png" type="image/png">
+        <link rel="stylesheet" href="/css/owl.carousel.min.css">
+        <link rel="stylesheet" href="/css/slick.css">
+        <link rel="stylesheet" href="/css/slick-theme.css">
+        <link rel="stylesheet" href="/css/owl.theme.default.min.css">
+        <link rel="stylesheet" type="text/css" href="/css/styles.css">
         <!-- End Styles ZOA-->
 
         <!-- Scripts -->
@@ -73,4 +73,10 @@
             toast.show();
         }
     </script>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/owl.carousel.min.js"></script>
+    <script src="/js/slick.min.js"></script>
+    <script src="/js/countdown.js"></script>
+    <script src="/js/main.js"></script>
 </html>

@@ -6,12 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <title>Ecommerce - Pedidos</title>
-    <link rel="shortcut icon" href="img/favicon.png" type="image/png">
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/slick.css">
-    <link rel="stylesheet" href="css/slick-theme.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 
 <body>
@@ -909,12 +903,6 @@
     <!-- End Footer -->
 </div>
 <a href="#" class="zoa-btn scroll_top"><i class="ion-ios-arrow-up"></i></a>
-<script src="js/jquery.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/owl.carousel.min.js"></script>
-<script src="js/slick.min.js"></script>
-<script src="js/countdown.js"></script>
-<script src="js/main.js"></script>
 </body>
 
 </html>
