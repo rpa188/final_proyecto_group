@@ -8,24 +8,26 @@
     <div class="py-12">
     	<div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-            <x-success-status class="mb-4" :status="session('message')" />
+            <!--<x-success-status class="mb-4" :status="session('message')" />-->
 
             <div class="py-4 px-4 bg-white overflow-hidden shadow-sm sm:rounded-lg">
             	<table class="table table-bordered">
             		<thead>
             			<tr>
-            				<th>imagen</th>
-            				<th>id_categoria</th>
-            				<th>nombre</th>
+                            <th>Id</th>
+            				<th>Imagen</th>
+            				<th>Categoria</th>
+            				<th>Nombre</th>
             				<th>SKU</th>
-            				<th>descripcion</th>
-            				<th>precio</th>
+            				<th>Descripcion</th>
+            				<th>Precio</th>
             				<th>Acciones</th>
             			</tr>
             		</thead>
             		<tbody>
             			@forelse ($productos as $producto)
 	            			<tr>
+                                <td>{{ $producto->id }}</td>
 	            				<td><img src="{{ asset('/storage/images/'.$producto->SKU . '.jpg') }}" alt="" title="" width="100px"></td>
 	            				<td>{{ $producto->id_categoria }}</td>
 	            				<td>{{ $producto->nombre }}</td>
@@ -43,7 +45,7 @@
 	            			</tr>
             			@empty
 	            			<tr>
-	            				<td colspan="6">Sin registros</td>
+	            				<td colspan="8">Sin registros</td>
 	            			</tr>
             			@endforelse
             		</tbody>

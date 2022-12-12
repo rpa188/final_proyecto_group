@@ -27,7 +27,7 @@ class ProductoController extends Controller
         $path = $request->file('imagen')->storeAs('public/images', $request->get('SKU') . '.jpg');
         $producto = Producto::create($data);
 
-        return redirect('/productos')->with('message', 'Successfully added');
+        return redirect('/productos')->with('message', 'Producto creado exitosamente');
     }
 
     public function edit($product_id)
@@ -39,6 +39,7 @@ class ProductoController extends Controller
     public function update(ProductoFormRequest $request, $product_id)
     {
         $data = $request->validated();
+        $path = $request->file('imagen')->storeAs('public/images', $request->get('SKU') . '.jpg');
         $producto = Producto::where('id', $product_id)->update([
             'id_categoria' => $data['id_categoria'],
             'nombre' => $data['nombre'],

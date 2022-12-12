@@ -43,6 +43,8 @@
                         <x-input-label for="imagen" :value="__('imagen')" />
 
                         <x-text-input id="imagen" class="block mt-1 w-full" type="file" name="imagen" :value="$producto->imagen" />
+
+                        <img id="img-preview" src="{{ asset('/storage/images/'.$producto->SKU . '.jpg') }}" alt="Vista previa" width="300px"/>
                     </div>
 
                     <div>
@@ -54,4 +56,14 @@
             </div>
         </div>
     </div>
+    <script>
+        var imgInp = document.getElementById('imagen');
+        var imgPrw = document.getElementById('img-preview');
+        imgInp.onchange = evt => {
+            const [file] = imgInp.files
+            if (file) {
+                imgPrw.src = URL.createObjectURL(file)
+            }
+        }
+    </script>
 </x-app-layout>
