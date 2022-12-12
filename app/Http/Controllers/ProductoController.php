@@ -23,37 +23,29 @@ class ProductoController extends Controller
     public function store(ProductoFormRequest $request)
     {
         $data = $request->validated();
-
         $name = $request->file('imagen')->getClientOriginalName();
- 
         $path = $request->file('imagen')->storeAs('public/images', $request->get('SKU') . '.jpg');
-
-        /*if ($request->hasFile('imagen')) {
-            $image      = $request->file('imagen');
-            //$fileName   = time() . '.' . $image->getClientOriginalExtension();
-            $fileName = $request->get('SKU');
-
-            $img = Image::make($image->getRealPath());
-            $img->resize(120, 120, function ($constraint) {
-                $constraint->aspectRatio();                 
-            });
-
-            $img->stream(); // <-- Key point
-
-            //dd();
-            Storage::disk('local')->put('images/'.$fileName, $img, 'public');
-        }*/
-
         $producto = Producto::create($data);
 
-        /*$producto = new Producto([
-          'id_categoria' => $request->get('id_categoria'),
-          'nombre' => $request->get('nombre'),
-          'SKU' => $request->get('SKU'),
-          'descripcion' => $request->get('descripcion'),
-          'precio' => $request->get('precio')
-        ]);
-        $producto->save();*/
         return redirect('/productos')->with('message', 'Successfully added');
+    }
+
+    public function edit($product_id)
+    {
+        $producto = Producto::find($product_id);
+        return view('producto.edit', compact('producto'));
+    }
+
+    public function update(ProductoFormRequest $request, $product_id)
+    {
+        $data = $request->validated();
+        $producto = Producto::where('id', $product_id)->update([
+            'id_categoria' => $data['id_categoria'],
+            'nombre' => $data['nombre'],
+            'SKU' => $data['SKU'],
+            'descripcion' => $data['descripcion'],
+            'precio' => $data['precio']
+        ]);
+        return redirect('/productos')->with('message', 'Producto Actualizado Exitosamente');
     }
 }

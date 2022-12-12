@@ -27,4 +27,6 @@ Route::controller(App\Http\Controllers\ProductoController::class)->group(functio
     Route::get('/productos', 'index');
     Route::get('/add-product', 'create');
     Route::post('/add-product', 'store');
+    Route::get('/edit-product/{product_id}', 'edit');
+    Route::put('/update-product/{product_id}', 'update');
 });
