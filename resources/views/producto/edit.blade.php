@@ -1,12 +1,7 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Productos') }}
-        </h2>
-    </x-slot>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <div class="py-12">
-
         <x-validation-errors class="mb-4" :errors="$errors" />
 
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
@@ -14,6 +9,11 @@
                 <form action="{{ url('update-product/'.$data['producto']->id) }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
+                    <div class="p-2">
+                        <x-input-label for="id_producto" :value="__('id')" />
+
+                        <x-text-input id="id_producto" class="block mt-1 w-full" type="text" name="id_producto" :value="$data['producto']->id" disabled />
+                    </div>
                     <div class="p-2">
                         <x-input-label for="nombre" :value="__('nombre')" />
 
@@ -54,7 +54,7 @@
                     <div class="p-2">
                         <x-input-label for="stock" :value="__('stock')" />
 
-                        <x-text-input id="stock" class="block mt-1 w-full" type="number" name="stock" :value="$data['producto']->stock->stock ?? 0" autofocus />
+                        <x-text-input id="stock" class="block mt-1 w-full" type="number" name="stock" :value="$data['producto']->movimiento->sum('cantidad') ?? 0" autofocus disabled />
                     </div>
                     <div class="p-2">
                         <x-input-label for="precio" :value="__('precio')" />

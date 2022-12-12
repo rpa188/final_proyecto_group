@@ -6,7 +6,7 @@ use App\Models\Categoria;
 use App\Models\Marca;
 use App\Models\Producto;
 use App\Models\ProductoHist;
-use App\Models\Stock;
+use App\Models\Movimiento;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ProductoFormRequest;
@@ -16,7 +16,7 @@ class ProductoController extends Controller
 {
     public function index()
     {
-        $productos = Producto::with(['categoria', 'marca', 'stock'])->get();
+        $productos = Producto::with(['categoria', 'marca', 'movimiento'])->get();
         return view('producto.index', compact('productos'));
     }
 
@@ -50,10 +50,10 @@ class ProductoController extends Controller
         ];
         ProductoHist::create($historyData);
 
-        Stock::create([
+        Movimiento::create([
             'id_producto' => $producto->id,
-            'id_sucursal' => 1,
-            'stock' => $data['stock'],
+            'id_destino' => 1,
+            'cantidad' => $data['stock'],
             'creator_user' => Auth::id()
         ]);
 
@@ -65,7 +65,7 @@ class ProductoController extends Controller
         $data = [
             'marca' => Marca::all(),
             'categoria' => Categoria::all(),
-            'producto' => Producto::with(['categoria', 'marca', 'stock'])->find($product_id)
+            'producto' => Producto::with(['categoria', 'marca', 'movimiento'])->find($product_id)
         ];
         return view('producto.edit', compact('data'));
     }
@@ -102,7 +102,7 @@ class ProductoController extends Controller
         ];
         ProductoHist::create($historyData);
 
-        $stock = Stock::where('id_producto', $product_id)->get();
+        /*$stock = Stock::where('id_producto', $product_id)->get();
         if(sizeof($stock) == 0){
             Stock::create([
                 'id_producto' => $product_id,
@@ -114,7 +114,7 @@ class ProductoController extends Controller
             $stockObj = $stock[0];
             $stockObj->stock = $data['stock'];
             $stockObj->save();
-        }
+        }*/
 
         return redirect('/productos')->with('message', 'Producto Actualizado Exitosamente');
     }
@@ -141,7 +141,7 @@ class ProductoController extends Controller
 
     public function detail($product_id){
         $data = [
-            'producto' => Producto::with(['categoria', 'marca'])->find($product_id),
+            'producto' => Producto::with(['categoria', 'marca', 'movimiento'])->find($product_id),
             'recomendados' => Producto::all()->random(5) //where('id','!=',$product_id)->inRandomOrder()->take(5)
             ];
         return view('producto.detail', compact('data'));

@@ -6,6 +6,7 @@ use App\Http\Requests\PedidoFormRequest;
 use App\Models\Cart;
 use App\Models\DetallePedido;
 use App\Models\Direccion;
+use App\Models\Movimiento;
 use App\Models\Pedido;
 use App\Models\TipoComprobante;
 use App\Models\TipoPago;
@@ -110,7 +111,17 @@ class PedidoController extends Controller
                 'id_producto' => $itemCarrito->id_producto,
                 'cantidad' => $itemCarrito->cantidad
             ];
+
+            $movimientoObj = [
+                'id_producto' => $itemCarrito->id_producto,
+                'id_destino' => 1,
+                'cantidad' => (($itemCarrito->cantidad) * (-1)),
+                'creator_user' => Auth::id()
+            ];
+
             DetallePedido::create($pedidoDetObj);
+            Movimiento::create($movimientoObj);
+
             $itemCarrito->delete();
         }
 

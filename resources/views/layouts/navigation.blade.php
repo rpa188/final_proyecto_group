@@ -1,185 +1,119 @@
-<nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
-    <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
-            <div class="flex">
-                <!-- Logo -->
-                <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
-                    </a>
-                </div>
-
-                <!-- Navigation Links -->
-                <!--<div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
-                    <x-nav-link :href="url('productos')" :active="request()->routeIs('productos')">
-                        {{ __('Productos') }}
-                    </x-nav-link>
-                    <x-nav-link :href="url('add-product')" :active="request()->routeIs('add-product')">
-                        {{ __('Agregar Producto') }}
-                    </x-nav-link>
-                </div>-->
-                <div class="space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <nav class="navbar navbar-expand-lg bg-light">
-                        <div class="container-fluid">
-                            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
-                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="/perfil">Perfil</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" href="/pedidos">Pedidos</a>
-                                    </li>
-                                    @can('maintenance')
-                                        <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Producto
-                                            </a>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="/productos">{{ __('Listar') }}</a></li>
-                                                <li><hr class="dropdown-divider"></li>
-                                                <li><a class="dropdown-item" href="/add-product">{{ __('Agregar Producto') }}</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Categoría
-                                            </a>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="/categorias">{{ __('Listar') }}</a></li>
-                                                <li><hr class="dropdown-divider"></li>
-                                                <li><a class="dropdown-item" href="/add-category">{{ __('Agregar Categoría') }}</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="nav-item dropdown">
-                                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                Marca
-                                            </a>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="/marcas">{{ __('Listar') }}</a></li>
-                                                <li><hr class="dropdown-divider"></li>
-                                                <li><a class="dropdown-item" href="/add-brand">{{ __('Agregar Categoría') }}</a></li>
-                                            </ul>
-                                        </li>
-                                    @endcan
-                                </ul>
-                            </div>
-                        </div>
-                    </nav>
-                </div>
+<!-- push menu-->
+<div class="pushmenu menu-home5">
+    <div class="menu-push">
+        <span class="close-left js-close"><i class="ion-ios-close-empty f-40"></i></span>
+        <div class="clearfix"></div>
+        <!--<form role="search" method="get" id="searchform" class="searchform" action="/search">
+            <div>
+                <label class="screen-reader-text" for="q"></label>
+                <input type="text" placeholder="Search for products" value="" name="q" id="q" autocomplete="off">
+                <input type="hidden" name="type" value="product">
+                <button type="submit" id="searchsubmit"><i class="ion-ios-search-strong"></i></button>
             </div>
-
-            <!-- Settings Dropdown -->
-            <div class="sm:flex sm:items-center sm:ml-6">
-                <x-dropdown align="right" width="48">
-                    <x-slot name="trigger">
-                        <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
-                            <div>{{ Auth::user()->name }}</div>
-
-                            <div class="ml-1">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        </button>
-                    </x-slot>
-
-                    <x-slot name="content">
-                        <!-- Authentication -->
+        </form>-->
+        <ul class="nav-home5 js-menubar">
+            <li class="level1 active dropdown"><a href="/perfil">{{ Auth::user()->name }}</a></li>
+            <li class="level1 active dropdown"><a href="/">Pagina Principal</a></li>
+            <li class="level1 active dropdown"><a href="/pedidos">Mis Pedidos</a></li>
+            @can('create-users')
+            <li class="level1 active dropdown"><a href="#">Mantenimiento</a>
+                <span class="icon-sub-menu"></span>
+                <div class="menu-level1 js-open-menu">
+                    <ul class="level1">
+                        <li class="level2">
+                            <a href="#">Productos</a>
+                            <ul class="menu-level-2">
+                                <li class="level3"><a href="/productos" title="">Lista</a></li>
+                                <li class="level3"><a href="/add-product" title="">Crear Producto</a></li>
+                            </ul>
+                        </li>
+                        <li class="level2">
+                            <a href="#">Categorias</a>
+                            <ul class="menu-level-2">
+                                <li class="level3"><a href="/categorias" title="">Lista</a></li>
+                                <li class="level3"><a href="/add-category" title="">Crear Categoria</a></li>
+                            </ul>
+                        </li>
+                        <li class="level2">
+                            <a href="#">Marcas</a>
+                            <ul class="menu-level-2">
+                                <li class="level3"><a href="/marcas" title="">Lista</a></li>
+                                <li class="level3"><a href="/add-brand" title="">Crear Marca</a></li>
+                            </ul>
+                        </li>
+                        <li class="level2">
+                            <a href="#">Usuarios</a>
+                            <ul class="menu-level-2">
+                                <li class="level3"><a href="/usuarios" title="">Lista</a></li>
+                                <li class="level3"><a href="/add-usuario" title="">Crear Usuario</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </li>
+            @endcan
+            <li class="level1">
+                <a href="#">Paginas</a>
+                <span class="icon-sub-menu"></span>
+                <ul class="menu-level1 js-open-menu">
+                    <li class="level2"><a href="aboutus.html" title="About Us ">Acerca de</a></li>
+                    <li class="level2"><a href="contactus.html" title="Contact">Contacto</a></li>
+                    <li class="level2"><a href="faq.html" title="FAQs">FAQs</a></li>
+                    <li class="level2"><a href="commingsoon.html" title="Coming Soon">Proximamente</a></li>
+                </ul>
+            </li>
+        </ul>
+        <ul class="mobile-account">
+            @if (Route::has('login'))
+                @auth
+                    <li><a href="/dashboard"><i class="fa fa-file"></i>Dashboard</a></li>
+                    <li>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-
                             <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
+                                             onclick="event.preventDefault();
                                                 this.closest('form').submit();">
+                                <i class="fa fa-user"></i>
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>
-                    </x-slot>
-                </x-dropdown>
-            </div>
-
-            <!-- Hamburger -->
-            <div class="-mr-2 flex items-center sm:hidden">
-                <button @click="open = ! open" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
-                    <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
-                        <path :class="{'hidden': open, 'inline-flex': ! open }" class="inline-flex" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        <path :class="{'hidden': ! open, 'inline-flex': open }" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
+                    </li>
+                @else
+                    <li><a href="/login"><i class="fa fa-unlock-alt"></i>Login</a></li>
+                    @if (Route::has('register'))
+                        <li><a href="/register"><i class="fa fa-user-plus"></i>Registrar</a></li>
+                    @endif
+                @endauth
+            @endif
+        </ul>
+        <h4 class="mb-title">connect and follow</h4>
+        <div class="mobile-social mg-bottom-30">
+            <a href=""><i class="fa fa-facebook"></i></a>
+            <a href=""><i class="fa fa-twitter"></i></a>
+            <a href=""><i class="fa fa-google-plus"></i></a>
         </div>
     </div>
+</div>
+<!-- end push menu-->
 
-    <!-- Responsive Navigation Menu -->
-    <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
-        <div class="pt-2 pb-3 space-y-1">
-            <!--<x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
-
-            <x-responsive-nav-link :href="url('productos')" :active="request()->routeIs('productos')">
-                {{ __('Productos') }}
-            </x-responsive-nav-link>
-
-            <x-responsive-nav-link :href="url('add-product')" :active="request()->routeIs('add-product')">
-                {{ __('Agregar Producto') }}
-            </x-responsive-nav-link>-->
-
-            @can('maintenance')
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/venta">Pedidos</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Producto
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/productos">Listar</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/add-product">{{ __('Agregar Producto') }}</a>
-                        </div>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Categoría
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/categorias">Listar</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/add-category">{{ __('Agregar Categoría') }}</a>
-                        </div>
-                    </li>
-                </ul>
-            @endcan
+<!-- Push cart -->
+<div class="pushmenu pushmenu-left cart-box-container">
+    <div class="cart-list">
+        <div class="cart-list-heading">
+            <h3 class="cart-title">My cart</h3>
+            <span class="close-left js-close"><i class="ion-ios-close-empty"></i></span>
         </div>
-
-        <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200">
-            <div class="px-4">
-                <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
-            </div>
-
-            <div class="mt-3 space-y-1">
-                <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-
-                    <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        {{ __('Log Out') }}
-                    </x-responsive-nav-link>
-                </form>
+        <div class="cart-inside">
+            <ul id="listaCarrito" class="list">
+            </ul>
+            <div class="cart-bottom">
+                <div class="cart-button mg-top-30">
+                    <a class="zoa-btn checkout" href="/checkout" title="">Ir a pagar</a>
+                </div>
             </div>
         </div>
+        <!-- End cart bottom -->
     </div>
-</nav>
+</div>
+<!-- End pushcart -->
