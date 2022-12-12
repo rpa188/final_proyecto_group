@@ -22,4 +22,12 @@ class PersonalData extends Model
         'celular',
         'create_user'
     ];
+
+    public function usuario(){
+        return $this->belongsTo(User::class, 'id_user', 'id');
+    }
+
+    public function usuario_creador(){
+        return $this->belongsTo(User::class, 'creator_user', 'id');
+    }
 }

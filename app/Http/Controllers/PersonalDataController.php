@@ -9,60 +9,40 @@ use Illuminate\Support\Facades\Auth;
 
 class PersonalDataController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        //
+        $personal_data = PersonalData::with(['usuario'])->get();
+        return view('usuario.index', compact('personal_data'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('usuario.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\PersonalData  $personalData
-     * @return \Illuminate\Http\Response
-     */
     public function show(PersonalData $personalData)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\PersonalData  $personalData
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(PersonalData $personalData)
+    public function edit($personaldata_id)
     {
-        //
+        $data = [
+            'personaldata' => PersonalData::find($personaldata_id),
+            'tipo_documento' => [
+                "1" => "DNI",
+                "2" => "LE"
+            ]
+        ];
+        return view('usuario.edit', compact('data'));
     }
 
-    public function update(PersonalDataFormRequest $request, $personaldata_id)
+    public function update(PersonalDataFormRequest $request, $personaldata_id, $pathid)
     {
         $data = $request->validated();
         if($personaldata_id == "0"){
@@ -73,16 +53,13 @@ class PersonalDataController extends Controller
             $personal_data = PersonalData::find($personaldata_id);
             $personal_data->update($data);
         }
-
-        return redirect('/perfil');
+        $redirect_path = '/perfil';
+        if($pathid == '2'){
+            $redirect_path = '/usuarios';
+        }
+        return redirect($redirect_path);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\PersonalData  $personalData
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(PersonalData $personalData)
     {
         //

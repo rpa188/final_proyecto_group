@@ -77,7 +77,12 @@ Route::middleware(['auth'])->controller(App\Http\Controllers\PerfilController::c
 });
 
 Route::middleware(['auth'])->controller(App\Http\Controllers\PersonalDataController::class)->group(function () {
-    Route::put('/update-personaldata/{personaldata_id}', 'update');
+    Route::get('/usuarios', 'index');
+    Route::get('/add-usuario', 'create');
+    Route::post('/add-personaldata/{personaldata_id}', 'store');
+    Route::get('/edit-usuario/{personaldata_id}', 'edit');
+    Route::put('/update-personaldata/{personaldata_id}/{redirect_path}', 'update');
+    Route::delete('/delete-usuario/{personaldata_id}', 'destroy');
 });
 
 Route::middleware(['auth'])->controller(App\Http\Controllers\DireccionController::class)->group(function () {
