@@ -48,4 +48,9 @@ class ProductoController extends Controller
         ]);
         return redirect('/productos')->with('message', 'Producto Actualizado Exitosamente');
     }
+
+    public function destroy($product_id){
+        $producto = Producto::find($product_id)->delete();
+        return redirect('/productos')->with('message', 'Producto Borrado Exitosamente');
+    }
 }

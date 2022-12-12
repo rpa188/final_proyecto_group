@@ -29,4 +29,5 @@ Route::controller(App\Http\Controllers\ProductoController::class)->group(functio
     Route::post('/add-product', 'store');
     Route::get('/edit-product/{product_id}', 'edit');
     Route::put('/update-product/{product_id}', 'update');
+    Route::delete('/delete-product/{product_id}', 'destroy');
 });
