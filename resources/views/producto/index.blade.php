@@ -35,7 +35,7 @@
 	            				<td>{{ $producto->precio }}</td>
 	            				<td>
 	            					<a href="{{ url('/edit-product/'.$producto->id) }}" class="btn btn-primary">Editar</a>
-                                    @can('create-user')
+                                    @can('create-users')
                                     <form action="{{ url('delete-product/'.$producto->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')

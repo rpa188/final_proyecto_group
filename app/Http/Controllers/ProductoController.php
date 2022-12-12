@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Categoria;
 use App\Models\Marca;
 use App\Models\Producto;
+use App\Models\ProductoHist;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ProductoFormRequest;
@@ -35,6 +36,19 @@ class ProductoController extends Controller
         $path = $request->file('imagen')->storeAs('public/images', $request->get('SKU') . '.jpg');
         $producto = Producto::create($data);
 
+        $historyData = [
+            'id_producto' => $producto->id,
+            'id_categoria' => $data['id_categoria'],
+            'id_marca' => $data['id_marca'],
+            'nombre' => $data['nombre'],
+            'SKU' => $data['SKU'],
+            'descripcion' => $data['descripcion'],
+            'precio' => $data['precio'],
+            'status' => 1,
+            'modifier_user' => Auth::id()
+        ];
+        ProductoHist::create($historyData);
+
         return redirect('/productos')->with('message', 'Producto creado exitosamente');
     }
 
@@ -51,7 +65,7 @@ class ProductoController extends Controller
     public function update(ProductoFormRequest $request, $product_id)
     {
         $data = $request->validated();
-        if(!empty($request->imagen)){
+        if(!empty($request->file('imagen'))){
             $path = $request->file('imagen')->storeAs('public/images', $request->get('SKU') . '.jpg');
         }
         $modifiedData = [
@@ -66,11 +80,40 @@ class ProductoController extends Controller
             $modifiedData['precio'] = $data['precio'];
         }
         $producto = Producto::where('id', $product_id)->update($modifiedData);
+
+        $historyData = [
+            'id_producto' => $product_id,
+            'id_categoria' => $data['id_categoria'],
+            'id_marca' => $data['id_marca'],
+            'nombre' => $data['nombre'],
+            'SKU' => $data['SKU'],
+            'descripcion' => $data['descripcion'],
+            'precio' => $data['precio'],
+            'status' => 1,
+            'modifier_user' => Auth::id()
+        ];
+        ProductoHist::create($historyData);
+
         return redirect('/productos')->with('message', 'Producto Actualizado Exitosamente');
     }
 
     public function destroy($product_id){
-        $producto = Producto::find($product_id)->delete();
+        $producto = Producto::find($product_id);
+
+        $historyData = [
+            'id_producto' => $product_id,
+            'id_categoria' => $producto['id_categoria'],
+            'id_marca' => $producto['id_marca'],
+            'nombre' => $producto['nombre'],
+            'SKU' => $producto['SKU'],
+            'descripcion' => $producto['descripcion'],
+            'precio' => $producto['precio'],
+            'status' => 0,
+            'modifier_user' => Auth::id()
+        ];
+        ProductoHist::create($historyData);
+
+        $producto->delete();
         return redirect('/productos')->with('message', 'Producto Borrado Exitosamente');
     }
 }

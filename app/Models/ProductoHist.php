@@ -5,13 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Producto extends Model
+class ProductoHist extends Model
 {
     use HasFactory;
 
-    protected $table = 'producto';
+    protected $table = 'producto_hist';
 
     protected $fillable = [
+        'id_producto',
         'id_categoria',
         'id_marca',
         'nombre',
@@ -19,8 +20,10 @@ class Producto extends Model
         'descripcion',
         'precio',
         'status',
-        'creator_user'
+        'modifier_user'
     ];
+
+    public $timestamps = false;
 
     public function categoria()
     {
