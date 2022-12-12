@@ -2,84 +2,87 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\MarcaFormRequest;
 use App\Models\Marca;
-use Illuminate\Http\Request;
+use App\Models\MarcaHist;
+use Illuminate\Support\Facades\Auth;
 
 class MarcaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        $marcas = Marca::all();
+        return view('marca.index', compact('marcas'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('marca.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(MarcaFormRequest $request)
     {
-        //
+        $data = $request->validated();
+        $data['creator_user'] = Auth::id();
+        $marca = Marca::create($data);
+
+        $historyData = [
+            'id_marca' => $marca->id,
+            'nombre' => $data['nombre'],
+            'descripcion' => $data['descripcion'],
+            'status' => 1,
+            'modifier_user' => Auth::id()
+        ];
+        MarcaHist::create($historyData);
+
+        return redirect('/marcas')->with('message', 'Marca creada exitosamente');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Marca  $marca
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Marca $marca)
+    public function edit($marca_id)
     {
-        //
+        $marca = Marca::find($marca_id);
+        return view('marca.edit', compact('marca'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Marca  $marca
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Marca $marca)
+    public function update(MarcaFormRequest $request,$marca_id)
     {
-        //
+        $data = $request->validated();
+
+        Marca::where('id', $marca_id)->update($data);
+
+        $historyData = [
+            'id_marca' => $marca_id,
+            'nombre' => $data['nombre'],
+            'descripcion' => $data['descripcion'],
+            'status' => 1,
+            'modifier_user' => Auth::id()
+        ];
+        MarcaHist::create($historyData);
+
+        return redirect('/marcas')->with('message', 'Marca Actualizada Exitosamente');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Marca  $marca
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Marca $marca)
+    public function destroy($marca_id)
     {
-        //
+        $marca = Marca::find($marca_id);
+
+        $historyData = [
+            'id_marca' => $marca_id,
+            'nombre' => $marca['nombre'],
+            'descripcion' => $marca['descripcion'],
+            'status' => 0,
+            'modifier_user' => Auth::id()
+        ];
+        $marca->delete();
+        MarcaHist::create($historyData);
+        return redirect('/marcas')->with('message', 'Marca Borrada Exitosamente');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Marca  $marca
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Marca $marca)
-    {
-        //
+    public function detail($brand_id){
+        $data = [
+
+        ];
+        return view('marca.detail', compact('data'));
     }
 }

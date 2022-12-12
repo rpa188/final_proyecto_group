@@ -33,15 +33,10 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="/perfil">Perfil</a>
                                     </li>
-                                    @can('shop')
                                     <li class="nav-item">
                                         <a class="nav-link" href="/pedidos">Pedidos</a>
                                     </li>
-                                    @endcan
                                     @can('maintenance')
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="/venta">Ventas</a>
-                                        </li>
                                         <li class="nav-item dropdown">
                                             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                 Producto
@@ -60,6 +55,16 @@
                                                 <li><a class="dropdown-item" href="/categorias">{{ __('Listar') }}</a></li>
                                                 <li><hr class="dropdown-divider"></li>
                                                 <li><a class="dropdown-item" href="/add-category">{{ __('Agregar Categoría') }}</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="nav-item dropdown">
+                                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                Marca
+                                            </a>
+                                            <ul class="dropdown-menu">
+                                                <li><a class="dropdown-item" href="/marcas">{{ __('Listar') }}</a></li>
+                                                <li><hr class="dropdown-divider"></li>
+                                                <li><a class="dropdown-item" href="/add-brand">{{ __('Agregar Categoría') }}</a></li>
                                             </ul>
                                         </li>
                                     @endcan
@@ -130,7 +135,7 @@
             @can('maintenance')
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/venta">Ventas</a>
+                        <a class="nav-link" href="/venta">Pedidos</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

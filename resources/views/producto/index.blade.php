@@ -11,7 +11,7 @@
             	<table id="product-table" class="table table-bordered">
             		<thead>
             			<tr>
-                            <th>Id</th>
+                            <th style="width: 20px;">Id</th>
             				<th>Imagen</th>
             				<th>Categoria</th>
                             <th>Marca</th>

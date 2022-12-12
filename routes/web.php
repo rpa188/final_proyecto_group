@@ -37,6 +37,26 @@ Route::controller(App\Http\Controllers\ProductoController::class)->group(functio
     Route::delete('/delete-product/{product_id}', 'destroy');
 });
 
+Route::controller(App\Http\Controllers\CategoriaController::class)->group(function () {
+    Route::get('/categorias', 'index');
+    Route::get('/categoria/{category_id}', 'detail');
+    Route::get('/add-category', 'create');
+    Route::post('/add-category', 'store');
+    Route::get('/edit-category/{category_id}', 'edit');
+    Route::put('/update-category/{category_id}', 'update');
+    Route::delete('/delete-category/{category_id}', 'destroy');
+});
+
+Route::controller(App\Http\Controllers\MarcaController::class)->group(function () {
+    Route::get('/marcas', 'index');
+    Route::get('/marca/{brand_id}', 'detail');
+    Route::get('/add-brand', 'create');
+    Route::post('/add-brand', 'store');
+    Route::get('/edit-brand/{brand_id}', 'edit');
+    Route::put('/update-brand/{brand_id}', 'update');
+    Route::delete('/delete-brand/{brand_id}', 'destroy');
+});
+
 Route::controller(App\Http\Controllers\CartController::class)->group(function () {
     Route::get('/cart', 'index');
     Route::post('/add-cartitem', 'store');
