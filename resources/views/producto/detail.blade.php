@@ -142,57 +142,11 @@
                 <span class="close-left js-close"><i class="ion-ios-close-empty"></i></span>
             </div>
             <div class="cart-inside">
-                <ul class="list">
-                    <li class="item-cart">
-                        <div class="product-img-wrap">
-                            <a href="#" title="Product"><img src="img/product/cart_product_1.jpg" alt="Product" class="img-responsive"></a>
-                        </div>
-                        <div class="product-details">
-                            <div class="inner-left">
-                                <div class="product-name"><a href="#">Grosgrain tie cotton top</a></div>
-                                <div class="product-price"><span>$20.9</span></div>
-                                <div class="cart-qtt">
-                                    <button type="button" class="quantity-left-minus btn btn-number js-minus" data-type="minus" data-field="">
-                                        <span class="minus-icon"><i class="ion-ios-minus-empty"></i></span>
-                                    </button>
-                                    <input type="text" name="number" value="1" class="product_quantity_number js-number">
-                                    <button type="button" class="quantity-right-plus btn btn-number js-plus" data-type="plus" data-field="">
-                                        <span class="plus-icon"><i class="ion-ios-plus-empty"></i></span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="item-cart">
-                        <div class="product-img-wrap">
-                            <a href="#" title="Product"><img src="img/product/cart_product_2.jpg" alt="Product" class="img-responsive"></a>
-                        </div>
-                        <div class="product-details">
-                            <div class="inner-left">
-                                <div class="product-name"><a href="#">Grosgrain tie cotton top</a></div>
-                                <div class="product-price"><span>$20.9</span></div>
-                                <div class="cart-qtt">
-                                    <button type="button" class="quantity-left-minus btn btn-number js-minus" data-type="minus" data-field="">
-                                        <span class="minus-icon"><i class="ion-ios-minus-empty"></i></span>
-                                    </button>
-                                    <input type="text" name="number" value="1" class="product_quantity_number js-number">
-                                    <button type="button" class="quantity-right-plus btn btn-number js-plus" data-type="plus" data-field="">
-                                        <span class="plus-icon"><i class="ion-ios-plus-empty"></i></span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
+                <ul id="listaCarrito" class="list">
                 </ul>
                 <div class="cart-bottom">
-                    <div class="cart-form">
-                        <div class="cart-note-form">
-                            <label for="CartSpecialInstructions" class="cart-note cart-note_text_label small--text-center">Special Offer:</label>
-                            <textarea rows="6" name="note" id="CartSpecialInstructions" class="cart-note__input form-control note--input"></textarea>
-                        </div>
-                    </div>
                     <div class="cart-button mg-top-30">
-                        <a class="zoa-btn checkout" href="#" title="">Check out</a>
+                        <a class="zoa-btn checkout" href="/checkout" title="">Ir a pagar</a>
                     </div>
                 </div>
             </div>
@@ -570,7 +524,7 @@
             z" />
                                             </g>
                                             </svg>
-                                        <span class="count cart-count">0</span>
+                                        <span id="cantCart" class="count cart-count">0</span>
                                     </a>
                                 </div>
                             </div>
@@ -624,12 +578,12 @@
                                 <div class="zoa-qtt">
                                     <button type="button" class="quantity-left-minus btn btn-number js-minus" data-type="minus" data-field="">
                                     </button>
-                                    <input type="text" name="number" value="1" class="product_quantity_number js-number">
+                                    <input id="itemCantidad" type="text" name="number" value="1" class="product_quantity_number js-number">
                                     <button type="button" class="quantity-right-plus btn btn-number js-plus" data-type="plus" data-field="">
                                     </button>
                                 </div>
-                                <a href="" class="zoa-btn zoa-addcart">
-                                    <i class="zoa-icon-cart"></i>add to cart
+                                <a href="#" onclick="addItemToCart({{ $data['producto']->id }})" class="zoa-btn zoa-addcart">
+                                    <i class="zoa-icon-cart"></i>agregar al carrito
                                 </a>
                             </div>
                             <a href="" class="btn-wishlist">+ Add to wishlist</a>
@@ -679,13 +633,13 @@
                                 <a href="/producto/{{ $recomendado->id }}"><img src="{{ asset('/storage/images/'.$recomendado->SKU . '.jpg') }}" alt="" class="img-responsive"></a>
                                 <div class="ribbon zoa-sale"><span>-15%</span></div>
                                 <div class="product-button-group">
-                                    <a href="#" class="zoa-btn zoa-quickview">
+                                    <!--<a href="#" class="zoa-btn zoa-quickview">
                                         <span class="zoa-icon-quick-view"></span>
                                     </a>
                                     <a href="#" class="zoa-btn zoa-wishlist">
                                         <span class="zoa-icon-heart"></span>
-                                    </a>
-                                    <a href="#" class="zoa-btn zoa-addcart">
+                                    </a>-->
+                                    <a href="#" class="zoa-btn zoa-addcart" onclick="addItemToCart({{ $recomendado->id }}, 1)">
                                         <span class="zoa-icon-cart"></span>
                                     </a>
                                 </div>
@@ -885,3 +839,117 @@
         <!-- EndContent -->
     </div>
 </x-app-layout>
+<script>
+    function addItemToCart(idProducto, cantidad){
+        if(!cantidad){
+            const itemCantidad = document.querySelector('#itemCantidad');
+            cantidad = itemCantidad.value;
+        }
+
+        const params = {
+            id_producto: idProducto,
+            cantidad: cantidad,
+            "_token": "{{ csrf_token() }}"
+        };
+        $.ajax({
+            type: 'POST',
+            url: '/add-cartitem',
+            data: params,
+            success: function (data) {
+                console.log(data);
+                updateCartNumber(true);
+            }
+        });
+    }
+
+    function updateCartNumber(renderList){
+        $.ajax({
+            type: 'GET',
+            url: '/cart',
+            success: function (data) {
+                const sum = data.reduce((accumulator, object) => {
+                    return accumulator + object.cantidad;
+                }, 0);
+
+                const cantCart = document.querySelector('#cantCart');
+                cantCart.textContent = sum;
+                if(renderList){
+                    renderListaCarrito(data);
+                }
+            }
+        });
+    }
+
+    function renderListaCarrito(arrayData){
+        var html = '';
+        for(var i = 0 ; i < arrayData.length ; i++){
+            html = html + '<li id="carrito_id-'+ arrayData[i].id +'" class="item-cart"><div class="product-img-wrap">' +
+                '<a href="/producto/'+ arrayData[i].producto.id +'" title="Product"><img src="{{ asset("/storage/images/") }}/'+arrayData[i].producto.SKU + '.jpg" alt="Product" class="img-responsive"></a></div>' +
+                '<div class="product-details"><div class="inner-left">' +
+                '<div class="product-name"><a href="/producto/'+ arrayData[i].producto.id +'">'+arrayData[i].producto.nombre+'</a></div>' +
+                '<div class="product-price"><span>S/.'+arrayData[i].producto.precio+'</span></div>' +
+                '<div class="cart-qtt">' +
+                '<button type="button" class="quantity-left-minus btn btn-number js-minus" data-type="minus" data-field="" onclick="subtractQuantity('+ arrayData[i].id +')"> <span class="minus-icon"><i class="ion-ios-minus-empty"></i></span></button>' +
+                '<input type="text" id="cantItem-'+ arrayData[i].id +'" name="number" value="'+ arrayData[i].cantidad + '" class="product_quantity_number js-number">' +
+                '<button type="button" class="quantity-right-plus btn btn-number js-plus" data-type="plus" data-field="" onclick="addQuantity('+ arrayData[i].id +', '+ arrayData[i].producto.id +')"> <span class="plus-icon"><i class="ion-ios-plus-empty"></i></span></button>' +
+                '</div></div></div></li>';
+        }
+        var ul = document.getElementById("listaCarrito");
+        ul.innerHTML = html;
+    }
+
+    function subtractQuantity(idItem, idProducto){
+        const cantItem = document.querySelector('#cantItem-'+idItem);
+        if(cantItem.value <= 1){
+            if (confirm('¿Está seguro de eliminar el producto?')) {
+                document.getElementById("carrito_id-"+idItem).remove();
+                deleteCartItem(idItem);
+            }
+        } else {
+            var cantidadFinal = parseInt(cantItem.value) - 1;
+            cantItem.value = cantidadFinal;
+            updateItemNumber(idItem, idProducto, cantidadFinal);
+        }
+    }
+
+    function addQuantity(idItem, idProducto){
+        const cantItem = document.querySelector('#cantItem-'+idItem);
+        var cantidadFinal = parseInt(cantItem.value) + 1;
+        cantItem.value = cantidadFinal;
+        updateItemNumber(idItem, idProducto, cantidadFinal);
+    }
+
+    function updateItemNumber(idCart, idProducto, cantidad){
+        $.ajax({
+            type: 'PUT',
+            url: '/update-cart/'+idCart,
+            data: {
+                    id_producto: idProducto,
+                    cantidad: cantidad,
+                    "_token": "{{ csrf_token() }}"
+                },
+            success: function (data) {
+                console.log(data);
+                updateCartNumber(false);
+            }
+        });
+    }
+
+    function deleteCartItem(idCart){
+        $.ajax({
+            type: 'DELETE',
+            url: '/delete-cartitem/'+idCart,
+            data: {
+                "_token": "{{ csrf_token() }}"
+            },
+            success: function (data) {
+                console.log(data);
+                updateCartNumber(false);
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        updateCartNumber(true);
+    });
+</script>

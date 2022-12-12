@@ -36,3 +36,11 @@ Route::controller(App\Http\Controllers\ProductoController::class)->group(functio
     Route::put('/update-product/{product_id}', 'update');
     Route::delete('/delete-product/{product_id}', 'destroy');
 });
+
+Route::controller(App\Http\Controllers\CartController::class)->group(function () {
+    Route::get('/cart', 'index');
+    Route::post('/add-cartitem', 'store');
+    Route::put('/update-cart/{cart_id}', 'update');
+    Route::delete('/delete-cartitem/{cart_id}', 'destroy');
+    Route::delete('/delete-cart', 'clean');
+});

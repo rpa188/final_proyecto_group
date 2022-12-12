@@ -6,6 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <title>Ecommerce - Pedidos</title>
+    <link rel="shortcut icon" href="img/favicon.png" type="image/png">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/slick.css">
+    <link rel="stylesheet" href="css/slick-theme.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
 </head>
 
 <body>
@@ -24,7 +30,7 @@
         </form>
         <ul class="nav-home5 js-menubar">
             <li class="level1 active dropdown">
-                <a href="#">Home</a>
+                <a href="#">Homeee</a>
                 <span class="icon-sub-menu"></span>
                 <ul class="menu-level1 js-open-menu">
                     <li class="level2"><a href="home1.html" title="">Demo 1</a></li>
@@ -466,7 +472,7 @@
                 <div class="row flex">
                     <div class="col col-sm-4">
                         <div class="topbar-left">
-                            <span>Hotline: +01 234 567 890</span>
+                            <span>Central: +01 340 4040</span>
                             <div class="topbar-social">
                                 <a href=""><i class="fa fa-facebook"></i></a>
                                 <a href=""><i class="fa fa-twitter"></i></a>
@@ -475,7 +481,7 @@
                         </div>
                     </div>
                     <div class="col col-sm-4 justify-content-center">
-                        <p>Summer sale discount off 50%! <a href="">Shop Now</a></p>
+                        <p>Descubre las ofertas que tenemos para ti! <a href="">Aquí</a></p>
                     </div>
                     <div class="col col-sm-4 justify-content-end">
                         <div class="topbar-right">
@@ -538,55 +544,48 @@
                     </div>
                     <div class="col-md-9 col-xs-4 col-sm-4 col2 flex justify-content-end">
                         <ul class="nav navbar-nav js-menubar hidden-xs hidden-sm">
-                            <li class="level1 active dropdown"><a href="#" title="Home">Home</a>
+                            <li class="level1 active dropdown"><a href="#" title="Home">Inicio</a>
                                 <span class="plus js-plus-icon"></span>
                                 <div class="menu-level-1 dropdown-menu style5">
                                     <ul class="level1">
                                         <li class="level2 col-6">
-                                            <a href="#">Home Set 1</a>
+                                            <a href="#">Conoce nuestra empresa</a>
                                             <ul class="menu-level-2">
-                                                <li class="level3"><a href="01-Home-v1.html" title="Home page 1">Home page 1 </a></li>
-                                                <li class="level3"><a href="01-Home-v2.html" title="Home page 2">Home page 2 </a></li>
-                                                <li class="level3"><a href="01-Home-v3.html" title="Home page 3">Home page 3 </a></li>
-                                                <li class="level3"><a href="01-Home-v4.html" title="Home page 4">Home page 4 </a></li>
-                                                <li class="level3"><a href="01-Home-v5.html" title="Home page 5">Home page 5 </a></li>
-                                                <li class="level3"><a href="01-Home-v6.html" title="Home page 6">Home page 6 </a></li>
+                                                <li class="level3"><a href="01-Home-v1.html" title="Home page 1">Nosotros </a></li>
+                                                <li class="level3"><a href="01-Home-v2.html" title="Home page 2">Misión</a></li>
+                                                <li class="level3"><a href="01-Home-v3.html" title="Home page 3">Visión </a></li>
+
                                             </ul>
                                         </li>
                                         <li class="level2 col-6">
-                                            <a href="#">Home Set 2</a>
+                                            <a href="#">Historia</a>
                                             <ul class="menu-level-2">
-                                                <li class="level3"><a href="01-Home-v7.html" title="Home page 7">Home page 7 </a></li>
-                                                <li class="level3"><a href="01-Home-v8.html" title="Home page 8">Home page 8 </a></li>
-                                                <li class="level3"><a href="01-Home-v9.html" title="Home page 9">Home page 9 </a></li>
-                                                <li class="level3"><a href="01-Home-v10.html" title="Home page 10">Home page 10 </a></li>
-                                                <li class="level3"><a href="01-Home-v11.html" title="Home page 11">Home page 11 </a></li>
+                                                <li class="level3"><a href="01-Home-v7.html" title="Home page 7">Fundación</a></li>
+                                                <li class="level3"><a href="01-Home-v8.html" title="Home page 8">Socios Estratégicos </a></li>
+
                                             </ul>
                                         </li>
                                     </ul>
                                     <div class="clearfix"></div>
                                 </div>
                             </li>
-                            <li class="level1 dropdown hassub"><a href="#" title="Shop">Shop</a>
+                            <li class="level1 dropdown hassub"><a href="#" title="Shop">Productos</a>
                                 <span class="plus js-plus-icon"></span>
                                 <div class="menu-level-1 dropdown-menu style4">
                                     <ul class="level1">
                                         <li class="level2 col-4a">
-                                            <a href="#">Shop Pages</a>
+                                            <a href="#">Nuestras lineas</a>
                                             <ul class="menu-level-2">
-                                                <li class="level3"><a href="02-Shop_v1.html" title="Shop page v1">Shop page v1 </a></li>
-                                                <li class="level3"><a href="02-Shop_v2.html" title="Shop page v2">Shop page v2 </a></li>
-                                                <li class="level3"><a href="02-Shop_v3.html" title="Shop page v3">Shop page v3 </a></li>
-                                                <li class="level3"><a href="02-Shop_v4.html" title="Shop page v4">Shop page v4 </a></li>
+                                                <li class="level3"><a href="02-Shop_v1.html" title="Shop page v1">Marcas Importadas</a></li>
+                                                <li class="level3"><a href="02-Shop_v2.html" title="Shop page v2">Producto Nacional </a></li>
                                             </ul>
                                         </li>
                                         <li class="level2 col-4a">
-                                            <a href="#">Product Pages</a>
+                                            <a href="#">Destacados</a>
                                             <ul class="menu-level-2">
-                                                <li class="level3"><a href="03-Single_product_v1.html" title="Single product v1">Single product v1</a></li>
-                                                <li class="level3"><a href="03-Single_product_v2.html" title="Single product v2">Single product v2</a></li>
-                                                <li class="level3"><a href="03-Single_product_v3.html" title="">Single product v3</a></li>
-                                                <li class="level3"><a href="03-Single_product_v4.html" title="Single product v4">Single product v4</a></li>
+                                                <li class="level3"><a href="03-Single_product_v1.html" title="Single product v1">Producto más vendido</a></li>
+                                                <li class="level3"><a href="03-Single_product_v2.html" title="Single product v2">Lo más nuevo</a></li>
+
                                             </ul>
                                         </li>
                                         <li class="level2 col-4a">
@@ -602,7 +601,7 @@
                                 </div>
                             </li>
                             <li class="level1 hassub dropdown">
-                                <a href="#" title="Collection">Collection</a>
+                                <a href="#" title="Collection">Destacado</a>
                                 <div class="menu-level-1 dropdown-menu style3">
                                     <div class="row">
                                         <div class="cate-item col-md-4 col-sm-12">
@@ -612,58 +611,25 @@
 
                                                 </a>
                                             </div>
-                                            <div class="demo-text text-center">New Trending '18</div>
+                                            <div class="demo-text text-center">Productos Importados</div>
                                         </div>
                                         <div class="cate-item col-md-4 col-sm-12">
                                             <div class="demo-img">
                                                 <a class="effect-img3 plus-zoom" href=""><img src="img/collection_2.jpg" alt="02-Shop_v2.html" class="img-reponsive"></a>
                                             </div>
-                                            <div class="demo-text text-center">New Lookbooks</div>
+                                            <div class="demo-text text-center">Productos Nacional</div>
                                         </div>
                                         <div class="cate-item col-md-4 col-sm-12">
                                             <div class="demo-img">
                                                 <a class="effect-img3 plus-zoom" href="02-Shop_v3.html"><img src="img/collection_3.jpg" alt="" class="img-reponsive"></a>
                                             </div>
-                                            <div class="demo-text text-center">Onsale</div>
+                                            <div class="demo-text text-center">Productos más vendidos</div>
                                         </div>
                                     </div>
                                 </div>
                             </li>
-                            <li class="level1 dropdown hassub">
-                                <a href="#" title="Pages">Pages</a>
-                                <span class="plus js-plus-icon"></span>
-                                <div class="menu-level-1 dropdown-menu style2">
-                                    <ul class="level1">
-                                        <li class="level2 col-6">
-                                            <a href="#">Page Set 1</a>
-                                            <ul class="menu-level-2">
-                                                <li class="level3"><a href="04-About.html" title="About Us">About Us</a></li>
-                                                <li class="level3"><a href="05-Contact.html" title="Contact">Contact</a></li>
-                                                <li class="level3"><a href="08-My-Account.html" title="My Account">My Account</a></li>
-                                                <li class="level3"><a href="09-Check-out.html" title="Check out">Check out</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="level2 col-6">
-                                            <a href="#">Page Set 2</a>
-                                            <ul class="menu-level-2">
-                                                <li class="level3"><a href="13-Cart.html" title="Cart">Cart</a></li>
-                                                <li class="level3"><a href="12-Coming-Soon.html" title="Coming Soon">Coming Soon</a></li>
-                                                <li class="level3"><a href="11-FAQS.html" title="FAQS">FAQs</a></li>
-                                                <li class="level3"><a href="10-404.html" title="">404</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </li>
-                            <li class="level1 active dropdown">
-                                <a href="#" title="Blog">Blog</a>
-                                <ul class="dropdown-menu menu-level-1">
-                                    <li><a class="sm_title" href="#" title="Blogs">Blogs</a></li>
-                                    <li class="level2"><a href="06-Blog.html" title="Blog List">Blog List</a></li>
-                                    <li class="level2"><a href="07-Blog_single.html" title="Blog Single">Blog Single</a></li>
-                                </ul>
-                            </li>
+
+
                         </ul>
                         <div class="topbar-left">
                             <div class="element element-search hidden-xs hidden-sm">
@@ -702,27 +668,27 @@
                                 </a>
                             </div>
                             @if (Route::has('login'))
-                                    @auth
-                                        <div class="element element-user hidden-xs hidden-sm">
-                                            <a href="{{ url('/dashboard') }}" class="zoa-icon js-user">
-                                                Dashboard
-                                            </a>
-                                        </div>
-                                    @else
-                                        <div class="element element-user hidden-xs hidden-sm">
-                                            <a href="{{ url('/login') }}" class="zoa-icon js-user">
-                                                Login
-                                            </a>
-                                        </div>
+                                @auth
+                                    <div class="element element-user hidden-xs hidden-sm">
+                                        <a href="{{ url('/dashboard') }}" class="zoa-icon js-user">
+                                            Dashboard
+                                        </a>
+                                    </div>
+                                @else
+                                    <div class="element element-user hidden-xs hidden-sm">
+                                        <a href="{{ url('/login') }}" class="zoa-icon js-user">
+                                            Login
+                                        </a>
+                                    </div>
 
-                                        @if (Route::has('register'))
-                                            <div class="element element-user hidden-xs hidden-sm">
-                                                <a href="{{ url('/register') }}" class="zoa-icon js-user">
-                                                    Register
-                                                </a>
-                                            </div>
-                                        @endif
-                                    @endauth
+                                    @if (Route::has('register'))
+                                        <div class="element element-user hidden-xs hidden-sm">
+                                            <a href="{{ url('/register') }}" class="zoa-icon js-user">
+                                                Register
+                                            </a>
+                                        </div>
+                                    @endif
+                                @endauth
                             @endif
                         </div>
                     </div>
@@ -737,8 +703,8 @@
             <div class="slide-img">
                 <img src="img/slide/slider-1-home-1.png" alt="" class="img-responsive">
                 <div class="box-center content2">
-                    <h3>Anna Collection</h3>
-                    <a href="" class="slide-btn">Shop Now</a>
+                    <h3></h3>
+                    <a href="" class="slide-btn"></a>
                 </div>
             </div>
             <div class="slide-img">
@@ -764,7 +730,7 @@
 
                         <div class="box-center align-items-end">
                             <h3 class="zoa-category-box-title">
-                                <a href="#">#trend</a>
+                                <a href="#">#destacado</a>
                             </h3>
                         </div>
                     </div>
@@ -774,7 +740,7 @@
                         @forelse ($productos as $producto)
                             <div class="col-xs-6 col-sm-6 col-md-4 col-lg-4 product-item">
                                 <div class="product-img" style="height: 213px; width: 213px;">
-                                    <a href=""><img src="{{ asset('/storage/images/'.$producto->SKU . '.jpg') }}" alt="" class="img-responsive"></a>
+                                    <a href="/producto/{{ $producto->id }}"><img src="{{ asset('/storage/images/'.$producto->SKU . '.jpg') }}" alt="" class="img-responsive"></a>
                                     <div class="ribbon zoa-sale"><span>-15%</span></div>
                                     <div class="product-button-group">
                                         <a href="#" class="zoa-btn zoa-quickview">
@@ -812,9 +778,9 @@
 
                 <div class="box-center">
                     <div class="content">
-                        <a class="text" href="">#spring collect</a>
+                        <a class="text" href="">#promociones</a>
                         <h2>-50%</h2>
-                        <a href="#" class="zoa-btn btn-shopnow">Shop Now</a>
+                        <a href="#" class="zoa-btn btn-shopnow">Descubre aquí</a>
                     </div>
                 </div>
             </div>
@@ -825,15 +791,15 @@
             <div class="row">
                 <div class="col-md-5 col-sm-6 col-xs-12">
                     <div class="newsletter-heading">
-                        <h3>get in touch</h3>
-                        <p>Subscribe for latest stories and promotions (35% sale)</p>
+                        <h3>Ponerse en contacto</h3>
+                        <p>Suscríbete para las últimas historias y promociones (35% de venta)</p>
                     </div>
                 </div>
                 <div class="col-md-7 col-sm-6 col-xs-12 flex-end">
                     <form class="form_newsletter" action="#" method="post">
                         <input type="email" value="" placeholder="Enter your emaill" name="EMAIL" id="mail" class="newsletter-input form-control">
                         <button id="subscribe" class="button_mini zoa-btn" type="submit">
-                            Subscribe
+                            Subscribirse
                         </button>
                     </form>
                 </div>
@@ -846,29 +812,29 @@
                 <div class="col-xs-6 col-sm-6 col-md-3 policy-item">
                     <div class="policy-icon"><img src="img/policy/icon_1.png" alt=""></div>
                     <div class="policy-content">
-                        <h3>Free shipping</h3>
-                        <p>on all orders over $49.00</p>
+                        <h3>Envío gratis</h3>
+                        <p>en todos los pedidos superiores a $ 49.00</p>
                     </div>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-3 policy-item">
                     <div class="policy-icon"><img src="img/policy/icon_2.png" alt=""></div>
                     <div class="policy-content">
-                        <h3>15 days returns</h3>
-                        <p>moneyback guarantee</p>
+                        <h3>15 días devoluciones</h3>
+                        <p>garantía de reembolso</p>
                     </div>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-3 policy-item">
                     <div class="policy-icon"><img src="img/policy/icon_3.png" alt=""></div>
                     <div class="policy-content">
-                        <h3>Secure checkout</h3>
-                        <p>100% protected by Paypal</p>
+                        <h3>Pago seguro</h3>
+                        <p>100% protegido por Paypal</p>
                     </div>
                 </div>
                 <div class="col-xs-6 col-sm-6 col-md-3 policy-item">
                     <div class="policy-icon"><img src="img/policy/icon_4.png" alt=""></div>
                     <div class="policy-content">
-                        <h3>100% free warranty</h3>
-                        <p>moneyback guarantee</p>
+                        <h3>100% garantía gratis</h3>
+                        <p>garantía de reembolso</p>
                     </div>
                 </div>
             </div>
@@ -888,10 +854,10 @@
                     </div>
                 </div>
                 <div class="f-col align-items-center">
-                    <p>© 2018 <a href="">Zoa.</a></p>
+                    <p>© 2018 <a href="">Group Latin</a></p>
                     <ul>
-                        <li><a href="">Privacy Policy</a></li>
-                        <li><a href="">Terms of Use</a></li>
+                        <li><a href="">Política de privacidad</a></li>
+                        <li><a href="">Términos de Uso</a></li>
                     </ul>
                 </div>
                 <div class="f-col">
@@ -903,6 +869,12 @@
     <!-- End Footer -->
 </div>
 <a href="#" class="zoa-btn scroll_top"><i class="ion-ios-arrow-up"></i></a>
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/owl.carousel.min.js"></script>
+<script src="js/slick.min.js"></script>
+<script src="js/countdown.js"></script>
+<script src="js/main.js"></script>
 </body>
 
 </html>
