@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ProductoFormRequest extends FormRequest
 {
@@ -23,7 +25,7 @@ class ProductoFormRequest extends FormRequest
      */
     public function rules()
     {
-        return [
+        $rules = [
             'id_categoria' => [
                 'required'
             ],
@@ -41,10 +43,14 @@ class ProductoFormRequest extends FormRequest
             'descripcion' => [
                 'required',
                 'max:255'
-            ],
-            'precio' => [
-                'required'
             ]
         ];
+
+        $user = User::find(Auth::id());
+        if ($user->can('create-users')) {
+            $rules['precio'] = ['required'];
+        }
+
+        return $rules;
     }
 }

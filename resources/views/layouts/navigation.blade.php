@@ -28,9 +28,17 @@
                             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
-                            @can('maintenance')
-                                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/perfil">Perfil</a>
+                                    </li>
+                                    @can('shop')
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/pedidos">Pedidos</a>
+                                    </li>
+                                    @endcan
+                                    @can('maintenance')
                                         <li class="nav-item">
                                             <a class="nav-link" href="/venta">Ventas</a>
                                         </li>
@@ -54,9 +62,9 @@
                                                 <li><a class="dropdown-item" href="/add-category">{{ __('Agregar Categoría') }}</a></li>
                                             </ul>
                                         </li>
-                                    </ul>
-                                </div>
-                            @endcan
+                                    @endcan
+                                </ul>
+                            </div>
                         </div>
                     </nav>
                 </div>

@@ -35,11 +35,13 @@
 	            				<td>{{ $producto->precio }}</td>
 	            				<td>
 	            					<a href="{{ url('/edit-product/'.$producto->id) }}" class="btn btn-primary">Editar</a>
+                                    @can('create-user')
                                     <form action="{{ url('delete-product/'.$producto->id) }}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <x-primary-button class="btn btn-danger" onclick="if (!confirm('¿Está seguro de eliminar el producto?')) { return false }">Delete</x-primary-button>
                                     </form>
+                                    @endcan
 	            				</td>
 	            			</tr>
             			@empty
