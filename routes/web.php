@@ -27,7 +27,7 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
-Route::controller(App\Http\Controllers\ProductoController::class)->group(function () {
+Route::middleware(['auth'])->controller(App\Http\Controllers\ProductoController::class)->group(function () {
     Route::get('/productos', 'index');
     Route::get('/producto/{product_id}', 'detail');
     Route::get('/add-product', 'create');
@@ -63,4 +63,23 @@ Route::controller(App\Http\Controllers\CartController::class)->group(function ()
     Route::put('/update-cart/{cart_id}', 'update');
     Route::delete('/delete-cartitem/{cart_id}', 'destroy');
     Route::delete('/delete-cart', 'clean');
+});
+
+Route::controller(App\Http\Controllers\PedidoController::class)->group(function () {
+    Route::get('/pedidos', 'index');
+    Route::get('/pedido/{order_id}', 'detail');
+    Route::get('/checkout', 'create');
+    Route::post('/create-order', 'store');
+});
+
+Route::middleware(['auth'])->controller(App\Http\Controllers\PerfilController::class)->group(function () {
+    Route::get('/perfil', 'index');
+});
+
+Route::middleware(['auth'])->controller(App\Http\Controllers\PersonalDataController::class)->group(function () {
+    Route::put('/update-personaldata/{personaldata_id}', 'update');
+});
+
+Route::middleware(['auth'])->controller(App\Http\Controllers\DireccionController::class)->group(function () {
+    Route::put('/update-direccion/{direccion_id}', 'update');
 });
