@@ -27,6 +27,9 @@ class ProductoFormRequest extends FormRequest
             'id_categoria' => [
                 'required'
             ],
+            'id_marca' => [
+                'required'
+            ],
             'nombre' => [
                 'required',
                 'max:100'

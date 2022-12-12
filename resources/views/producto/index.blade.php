@@ -7,16 +7,14 @@
 
     <div class="py-12">
     	<div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-
-            <!--<x-success-status class="mb-4" :status="session('message')" />-->
-
             <div class="py-4 px-4 bg-white overflow-hidden shadow-sm sm:rounded-lg">
-            	<table class="table table-bordered">
+            	<table id="product-table" class="table table-bordered">
             		<thead>
             			<tr>
                             <th>Id</th>
             				<th>Imagen</th>
             				<th>Categoria</th>
+                            <th>Marca</th>
             				<th>Nombre</th>
             				<th>SKU</th>
             				<th>Descripcion</th>
@@ -29,7 +27,8 @@
 	            			<tr>
                                 <td>{{ $producto->id }}</td>
 	            				<td><img src="{{ asset('/storage/images/'.$producto->SKU . '.jpg') }}" alt="" title="" width="100px"></td>
-	            				<td>{{ $producto->id_categoria }}</td>
+	            				<td>{{ $producto->categoria->nombre }}</td>
+                                <td>{{ $producto->marca->nombre }}</td>
 	            				<td>{{ $producto->nombre }}</td>
 	            				<td>{{ $producto->SKU }}</td>
 	            				<td>{{ $producto->descripcion }}</td>
@@ -45,7 +44,7 @@
 	            			</tr>
             			@empty
 	            			<tr>
-	            				<td colspan="8">Sin registros</td>
+	            				<td colspan="9">Sin registros</td>
 	            			</tr>
             			@endforelse
             		</tbody>
