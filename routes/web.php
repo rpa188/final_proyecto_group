@@ -70,6 +70,7 @@ Route::middleware(['auth'])->controller(App\Http\Controllers\PedidoController::c
     Route::get('/pedido/{order_id}', 'detail');
     Route::get('/checkout', 'create');
     Route::post('/create-order', 'store');
+    Route::put('/update-order/{order_id}', 'update');
 });
 
 Route::middleware(['auth'])->controller(App\Http\Controllers\PerfilController::class)->group(function () {

@@ -23,4 +23,9 @@ class Direccion extends Model
         'descripcion_adicional',
         'id_user'
     ];
+
+    public function ubigeo()
+    {
+        return $this->belongsTo(Ubigeo::class, 'id_ubigeo', 'id');
+    }
 }

@@ -3,35 +3,45 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PedidoFormRequest;
+use App\Mail\ClienteMail;
 use App\Models\Cart;
 use App\Models\DetallePedido;
 use App\Models\Direccion;
 use App\Models\Movimiento;
 use App\Models\Pedido;
+use App\Models\StatusPedido;
 use App\Models\TipoComprobante;
 use App\Models\TipoPago;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use stdClass;
 
 class PedidoController extends Controller
 {
     public function index()
     {
-        $pedidos = Pedido::where('id_user', Auth::id())->with(['direccion', 'tipo_comprobante', 'tipo_pago'])->get();
+        if(Auth::user()->can('maintenance')){
+            $pedidos = Pedido::with(['direccion', 'tipo_comprobante', 'tipo_pago', 'user_cliente'])->get();
+        } else {
+            $pedidos = Pedido::with(['direccion', 'tipo_comprobante', 'tipo_pago', 'user_cliente'])->where('id_user', Auth::id())->get();
+        }
         return view('pedido.index', compact('pedidos'));
     }
 
     public function detail($pedido_id)
     {
-        $pedido = Pedido::find($pedido_id)->with(['direccion', 'tipo_comprobante', 'tipo_pago'])->first();
+        $pedido = Pedido::with(['direccion.ubigeo', 'tipo_comprobante', 'tipo_pago', 'status_pedido'])->get()->find($pedido_id);
+        $detallePedido = DetallePedido::with(['producto'])->where('id_pedido', $pedido_id)->get();
+        $subtotal = 0.0;
+        foreach($detallePedido as $item){
+            $subtotal = $subtotal + ($item['producto']->precio * $item->cantidad);
+        }
         $data = [
             'usuario' => Auth::user(),
-            'itemsCart' => DetallePedido::where('id_pedido', $pedido_id)->with(['producto'])->get(),
-            'subtotal' => 0.0,
-            'direccion' => $pedido->direccion,
-            'tipoComprobante' => TipoComprobante::all(),
-            'tipoPago' => TipoPago::all()
+            'itemsCart' => $detallePedido,
+            'subtotal' => $subtotal,
+            'pedido' => $pedido
         ];
         return view('pedido.detail', compact('data'));
     }
@@ -133,9 +143,31 @@ class PedidoController extends Controller
         //
     }
 
-    public function update(Request $request, int $cart_id)
+    public function update(Request $request, int $order_id)
     {
-        //
+        $id_status_pedido = $request->status;
+        $pedido = Pedido::find($order_id);
+        $pedido->id_status_pedido = $id_status_pedido;
+        $pedido->update();
+
+        $estado_nombre = StatusPedido::find($id_status_pedido)->nombre;
+        $subject = 'Pedido Cancelado! Pedido #' . $pedido->id;
+        $title = 'Tenemos un problema, ' . $pedido->user_cliente->name;
+        if($id_status_pedido == 3){
+            $subject = 'Gracias por su compra! Pedido #' . $pedido->id;
+            $title = 'Gracias por tu compra, ' . $pedido->user_cliente->name;
+        }
+        $mailData = [
+            'template' => 'pedido',
+            'orderObj' => $pedido,
+            'subject' => $subject,
+            'title' => $title,
+            'body' => "Su pedido fue ".$estado_nombre,
+            'order_date' => date('d/M/Y', strtotime($pedido->created_at))
+        ];
+
+        Mail::to($pedido->user_cliente->email)->send(new ClienteMail($mailData));
+        $request->session()->flash('message', 'Pedido '. $estado_nombre .'. Usuario notificado por correo');
     }
 
     public function destroy(int $cart_id)

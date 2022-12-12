@@ -40,4 +40,9 @@ class Pedido extends Model
     {
         return $this->belongsTo(StatusPedido::class, 'id_status_pedido', 'id');
     }
+
+    public function user_cliente()
+    {
+        return $this->belongsTo(User::class, 'id_user', 'id');
+    }
 }
