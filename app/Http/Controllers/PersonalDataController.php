@@ -90,10 +90,14 @@ class PersonalDataController extends Controller
             PersonalData::create($params_personal_data);
         }
         $user = User::find($usuario_id);
-        $user->update([
+        $dataUserUpdated = [
             'name' => $data['nombre'],
             'email' => $data['email']
-        ]);
+        ];
+        if($data['password']!==""){
+            $dataUserUpdated['password'] = Hash::make($data['password']);
+        }
+        $user->update($dataUserUpdated);
 
         $user->removeRole('cliente');
         $user->removeRole('vendedor');
