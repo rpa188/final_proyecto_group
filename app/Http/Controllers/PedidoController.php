@@ -19,12 +19,42 @@ use stdClass;
 
 class PedidoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        if(Auth::user()->can('maintenance')){
-            $pedidos = Pedido::with(['direccion', 'tipo_comprobante', 'tipo_pago', 'user_cliente'])->get();
+        $array_filter = [];
+        if(isset($request->filter)){
+            if(strpos(($request->filter ?? ''), 'aprov') > -1){
+                array_push($array_filter, 3);
+            }
+            if(strpos(($request->filter ?? ''), 'pend') > -1){
+                array_push($array_filter, 1);
+            }
+            if(strpos(($request->filter ?? ''), 'cancel') > -1){
+                array_push($array_filter, 2);
+            }
         } else {
-            $pedidos = Pedido::with(['direccion', 'tipo_comprobante', 'tipo_pago', 'user_cliente'])->where('id_user', Auth::id())->get();
+            $array_filter = [1,2,3];
+        }
+        if(count($array_filter) > 0){
+            if(Auth::user()->can('maintenance')){
+                $pedidos = Pedido::with(['direccion', 'tipo_comprobante', 'tipo_pago', 'user_cliente'])
+                    ->whereIn('id_status_pedido', $array_filter)
+                    ->get();
+            } else {
+                $pedidos = Pedido::with(['direccion', 'tipo_comprobante', 'tipo_pago', 'user_cliente'])
+                    ->whereIn('id_status_pedido', $array_filter)
+                    ->where('id_user', Auth::id())->get();
+            }
+        } else {
+            if(Auth::user()->can('maintenance')){
+                $pedidos = Pedido::with(['direccion', 'tipo_comprobante', 'tipo_pago', 'user_cliente'])
+                    ->whereIn('id_status_pedido', $array_filter)
+                    ->get();
+            } else {
+                $pedidos = Pedido::with(['direccion', 'tipo_comprobante', 'tipo_pago', 'user_cliente'])
+                    ->whereIn('id_status_pedido', $array_filter)
+                    ->where('id_user', Auth::id())->get();
+            }
         }
         return view('pedido.index', compact('pedidos'));
     }
@@ -125,6 +155,7 @@ class PedidoController extends Controller
             $movimientoObj = [
                 'id_producto' => $itemCarrito->id_producto,
                 'id_destino' => 1,
+                'id_pedido' => $pedidoObj->id,
                 'cantidad' => (($itemCarrito->cantidad) * (-1)),
                 'creator_user' => Auth::id()
             ];
@@ -149,6 +180,19 @@ class PedidoController extends Controller
         $pedido = Pedido::find($order_id);
         $pedido->id_status_pedido = $id_status_pedido;
         $pedido->update();
+
+        $detalle_pedido = DetallePedido::where('id_pedido', $pedido->id)->get();
+        foreach($detalle_pedido as $item){
+            $movimientoObj = [
+                'id_producto' => $item->id_producto,
+                'id_destino' => 1,
+                'id_pedido' => $pedido->id,
+                'cantidad' => $item->cantidad,
+                'creator_user' => Auth::id()
+            ];
+
+            Movimiento::create($movimientoObj);
+        }
 
         $estado_nombre = StatusPedido::find($id_status_pedido)->nombre;
         $subject = 'Pedido Cancelado! Pedido #' . $pedido->id;
