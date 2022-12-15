@@ -3,26 +3,54 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\PersonalDataFormRequest;
+use App\Http\Requests\UsuarioFormRequest;
+use App\Http\Requests\UsuarioPassFormRequest;
 use App\Models\PersonalData;
-use Illuminate\Http\Request;
+use App\Models\TipoDocumento;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class PersonalDataController extends Controller
 {
     public function index()
     {
-        $personal_data = PersonalData::with(['usuario'])->get();
-        return view('usuario.index', compact('personal_data'));
+        $user_list = User::with(['personal_data', 'rol'])->get();
+        return view('usuario.index', compact('user_list'));
     }
 
     public function create()
     {
-        return view('usuario.create');
+        $data = [
+            'tipo_documento' => TipoDocumento::all()
+        ];
+        return view('usuario.create', compact('data'));
     }
 
-    public function store(Request $request)
+    public function store(UsuarioPassFormRequest $request)
     {
-        //
+        $data = $request->validated();
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+        ]);
+
+        PersonalData::create([
+            'id_user' => $user->id,
+            'nombre' => $data['nombre'],
+            'ape_paterno' => $data['ape_paterno'],
+            'ape_materno' => $data['ape_materno'],
+            'id_tipo_documento' => $data['id_tipo_documento'],
+            'numero_documento' => $data['numero_documento'],
+            'fecha_nacimiento' => $data['fecha_nacimiento'],
+            'celular' => $data['celular'],
+            'creator_user' => Auth::id()
+        ]);
+
+        $user->assignRole($data['role']);
+
+        return redirect('/usuarios')->with('message', 'Usuario creado exitosamente');
     }
 
     public function show(PersonalData $personalData)
@@ -30,19 +58,52 @@ class PersonalDataController extends Controller
         //
     }
 
-    public function edit($personaldata_id)
+    public function edit($user_id)
     {
         $data = [
-            'personaldata' => PersonalData::find($personaldata_id),
-            'tipo_documento' => [
-                "1" => "DNI",
-                "2" => "LE"
-            ]
+            'usuario' => User::with('personal_data')->find($user_id),
+            'tipo_documento' => TipoDocumento::all()
         ];
         return view('usuario.edit', compact('data'));
     }
 
-    public function update(PersonalDataFormRequest $request, $personaldata_id, $pathid)
+    public function update(UsuarioFormRequest $request, $usuario_id){
+        $data = $request->validated();
+        $personal_data = PersonalData::where('id_user', $usuario_id)->get();
+
+        $params_personal_data = [
+            'id_user' => $usuario_id,
+            'nombre' => $data['nombre'],
+            'ape_paterno' => $data['ape_paterno'],
+            'ape_materno' => $data['ape_materno'],
+            'id_tipo_documento' => $data['id_tipo_documento'],
+            'numero_documento' => $data['numero_documento'],
+            'fecha_nacimiento' => $data['fecha_nacimiento'],
+            'celular' => $data['celular'],
+            'creator_user' => Auth::id()
+        ];
+
+        if(sizeof($personal_data) > 0){
+            $personal_data = PersonalData::find($personal_data[0]->id);
+            $personal_data->update($params_personal_data);
+        } else {
+            PersonalData::create($params_personal_data);
+        }
+        $user = User::find($usuario_id);
+        $user->update([
+            'name' => $data['nombre'],
+            'email' => $data['email']
+        ]);
+
+        $user->removeRole('cliente');
+        $user->removeRole('vendedor');
+        $user->removeRole('admin');
+        $user->assignRole($data['role']);
+
+        return redirect('/usuarios')->with('message', 'Usuario actualizado exitosamente');
+    }
+
+    public function update_personaldata(PersonalDataFormRequest $request, $personaldata_id, $pathid)
     {
         $data = $request->validated();
         if($personaldata_id == "0"){
@@ -60,8 +121,11 @@ class PersonalDataController extends Controller
         return redirect($redirect_path)->with('message', 'Usuario Actualizado Exitosamente');
     }
 
-    public function destroy(PersonalData $personalData)
+    public function destroy($user_id)
     {
-        //
+        User::find($user_id)->delete();
+        PersonalData::where('id_user', $user_id)->delete();
+
+        return redirect('/usuarios')->with('message', 'Usuario eliminado exitosamente');
     }
 }
